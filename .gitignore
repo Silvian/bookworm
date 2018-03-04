@@ -99,3 +99,20 @@ ENV/
 
 # mypy
 .mypy_cache/
+__pycache__/
+*.pyc
+
+# ignore sql lite database
+db.*
+
+# pyenv
+.python-version
+
+# Pycharm/IntelliJ
+.idea/
+
+# Ignore anything in static/admin
+static/admin/
+
+# Ignore the local_settings.py
+todos/local_settings.py
