@@ -11,6 +11,33 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/db-data
 
+  rabbitmq:
+    image: rabbitmq:3.6-management
+    hostname: rabbitmq
+    env_file: .env
+    ports:
+      - "5672:5672"
+
+  celery_worker:
+    build: .
+    command: dockerize -wait tcp://postgres:5432 -wait tcp://rabbitmq:5672 -timeout 60s celery -A bookworm worker --loglevel DEBUG
+    env_file: .env
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - rabbitmq
+      - postgres
+
+  celery_beat:
+    build: .
+    env_file: .env
+    command: dockerize -wait tcp://postgres:5432 -wait tcp://rabbitmq:5672 -timeout 60s celery -A bookworm beat --max-interval=10 --pidfile= --loglevel DEBUG
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - rabbitmq
+      - postgres
+
   web:
     build: .
     env_file: .env
@@ -19,4 +46,5 @@ services:
     ports:
       - "8000:8000"
     depends_on:
+      - rabbitmq
       - postgres
