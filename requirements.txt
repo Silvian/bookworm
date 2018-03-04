@@ -1,0 +1,14 @@
+Django==2.0.2
+django-common-helpers==0.9.1
+django-filter==1.1.0
+djangorestframework==3.7.7
+factory-boy==2.9.2
+Faker==0.8.10
+kombu==4.1.0
+Markdown==2.6.11
+psycopg2==2.7.3.2
+python-dateutil==2.6.1
+pytz==2017.3
+six==1.11.0
+text-unidecode==1.1
+vine==1.1.4
