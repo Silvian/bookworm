@@ -70,6 +70,10 @@ class Book(models.Model):
     description = models.TextField(
         blank=True,
     )
+    pages = models.IntegerField(
+        blank=True,
+        null=True,
+    )
     authors = models.ManyToManyField(
         Author,
         related_name="+",
@@ -86,9 +90,25 @@ class Book(models.Model):
     published_date = models.DateField(
         blank=True,
     )
-    pages = models.IntegerField(
+
+    def publish(self):
+        """Publish book."""
+        self.save()
+
+    def __str__(self):
+        """Return the string representation."""
+        return self.title
+
+
+class ReadingList(models.Model):
+    """Reading list model."""
+
+    book = models.ForeignKey(
+        Book,
+        related_name="+",
+        verbose_name=_('book'),
+        on_delete=models.CASCADE,
         blank=True,
-        null=True,
     )
     read = models.BooleanField(
         default=False,
@@ -109,31 +129,9 @@ class Book(models.Model):
         super().clean_fields(exclude=exclude)
 
     def publish(self):
-        """Publish book."""
-        self.save()
-
-    def __str__(self):
-        """Return the string representation."""
-        return self.title
-
-
-class ReadingList(models.Model):
-    """Reading list model."""
-
-    name = models.CharField(
-        max_length=200,
-    )
-    books = models.ManyToManyField(
-        Book,
-        related_name="reading_list",
-        verbose_name=_('books'),
-        blank=True,
-    )
-
-    def publish(self):
         """Publish reading list."""
         self.save()
 
     def __str__(self):
         """Return the string representation."""
-        return self.name
+        return self.book.title

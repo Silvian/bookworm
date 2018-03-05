@@ -34,11 +34,9 @@ class BookAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'genre',
+        'pages',
         'publisher',
         'published_date',
-        'pages',
-        'read',
-        'date_read',
     )
 
     search_fields = (
@@ -51,7 +49,6 @@ class BookAdmin(admin.ModelAdmin):
 
     list_filter = (
         'genre',
-        'read',
     )
 
 
@@ -60,15 +57,20 @@ class ReadingList(admin.ModelAdmin):
     """ReadingList admin."""
 
     list_display = (
-        'name',
+        'book',
+        'read',
+        'date_read',
     )
 
     search_fields = (
-        'books__title',
-        'books__genre',
-        'books__authors__name',
-        'books__publisher__name',
-        'books__publisher__published_date',
+        'book__title',
+        'book__genre',
+        'book__authors__name',
+        'book__publisher__name',
+        'book__published_date',
     )
 
-    list_filter = ('books__read',)
+    list_filter = (
+        'read',
+        'book__genre',
+    )
