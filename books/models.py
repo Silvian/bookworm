@@ -1,9 +1,15 @@
 """Books models."""
 
+from django.conf import settings
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
-from model_utils import Choices
 from django.utils.translation import ugettext_lazy as _
+from django_common.auth_backends import User
+from model_utils import Choices
+
+from rest_framework.authtoken.models import Token
 
 
 class Author(models.Model):
@@ -117,6 +123,10 @@ class ReadingList(models.Model):
         blank=True,
         null=True,
     )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
 
     def mark_date_read(self):
         """Mark date when book was read."""
@@ -135,3 +145,10 @@ class ReadingList(models.Model):
     def __str__(self):
         """Return the string representation."""
         return self.book.title
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    """Generate authentication API token for a created user instance."""
+    if created:
+        Token.objects.create(user=instance)
