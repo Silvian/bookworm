@@ -76,6 +76,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bookworm.wsgi.application'
 
+# Load fixtures from directories list
+
+FIXTURE_DIRS = (
+   os.path.join(BASE_DIR, '/books/fixtures'),
+)
+
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
