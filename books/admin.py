@@ -58,8 +58,10 @@ class ReadingList(admin.ModelAdmin):
 
     list_display = (
         'book',
-        'read',
-        'date_read',
+        'started_reading',
+        'started_date',
+        'finished_reading',
+        'finished_date',
     )
 
     search_fields = (
@@ -71,6 +73,7 @@ class ReadingList(admin.ModelAdmin):
     )
 
     list_filter = (
-        'read',
+        'started_reading',
+        'finished_reading',
         'book__genre',
     )

@@ -116,10 +116,17 @@ class ReadingList(models.Model):
         on_delete=models.CASCADE,
         blank=True,
     )
-    read = models.BooleanField(
+    started_reading = models.BooleanField(
         default=False,
     )
-    date_read = models.DateField(
+    started_date = models.DateField(
+        blank=True,
+        null=True,
+    )
+    finished_reading = models.BooleanField(
+        default=False,
+    )
+    finished_date = models.DateField(
         blank=True,
         null=True,
     )
@@ -128,14 +135,24 @@ class ReadingList(models.Model):
         on_delete=models.CASCADE,
     )
 
+    def mark_date_started(self):
+        """Mark date when book was started."""
+        self.started_date = timezone.now()
+
     def mark_date_read(self):
         """Mark date when book was read."""
-        self.date_read = timezone.now()
+        self.finished_date = timezone.now()
 
     def clean_fields(self, exclude=None):
         """Clean the fields needed for django admin."""
-        if self.read:
+        if self.started_reading:
+            self.mark_date_started()
+        if self.finished_reading:
             self.mark_date_read()
+            if not self.started_reading:
+                self.started_reading = True
+            if not self.started_date:
+                self.mark_date_started()
         super().clean_fields(exclude=exclude)
 
     def publish(self):
