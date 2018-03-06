@@ -90,7 +90,7 @@ class Book(models.Model):
         Publisher,
         related_name="+",
         verbose_name=_('publisher'),
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
         blank=True,
     )
     published_date = models.DateField(
@@ -106,6 +106,26 @@ class Book(models.Model):
         return self.title
 
 
+class Favourite(models.Model):
+    """Favourite books model."""
+
+    book = models.ForeignKey(
+        Book,
+        related_name="+",
+        verbose_name=_('book'),
+        on_delete=models.PROTECT,
+        blank=True,
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+    )
+
+    def __str__(self):
+        """Return the string representation."""
+        return self.book.title
+
+
 class ReadingList(models.Model):
     """Reading list model."""
 
@@ -113,7 +133,7 @@ class ReadingList(models.Model):
         Book,
         related_name="+",
         verbose_name=_('book'),
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
         blank=True,
     )
     started_reading = models.BooleanField(
@@ -132,7 +152,7 @@ class ReadingList(models.Model):
     )
     user = models.ForeignKey(
         User,
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
     )
 
     def mark_date_started(self):

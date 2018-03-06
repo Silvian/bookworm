@@ -5,6 +5,7 @@ from .models import (
     Author,
     Publisher,
     Book,
+    Favourite,
     ReadingList,
 )
 
@@ -47,13 +48,29 @@ class BookAdmin(admin.ModelAdmin):
         'published_date',
     )
 
-    list_filter = (
-        'genre',
+    list_filter = ('genre',)
+
+
+@admin.register(Favourite)
+class Favourite(admin.ModelAdmin):
+    """Favourite admin."""
+
+    list_display = ('book', 'user',)
+
+    search_fields = (
+        'book__title',
+        'book__genre',
+        'book__authors__name',
+        'book__publisher__name',
+        'book__published_date',
+        'user__username',
     )
+
+    list_filter = ('book__genre',)
 
 
 @admin.register(ReadingList)
-class ReadingList(admin.ModelAdmin):
+class ReadingListAdmin(admin.ModelAdmin):
     """ReadingList admin."""
 
     list_display = (
@@ -70,6 +87,7 @@ class ReadingList(admin.ModelAdmin):
         'book__authors__name',
         'book__publisher__name',
         'book__published_date',
+        'user__username',
     )
 
     list_filter = (
