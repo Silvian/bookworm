@@ -95,6 +95,7 @@ class Book(models.Model):
     )
     published_date = models.DateField(
         blank=True,
+        null=True,
     )
 
     def publish(self):
