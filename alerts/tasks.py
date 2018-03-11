@@ -21,10 +21,14 @@ def send_sms_alert():
 
         for book in reading_list:
             if book.started_reading and not book.finished_reading:
-                service.send_alert(
-                    message="{} {}".format(
-                        alert.message,
-                        book.book.title,
-                    ),
-                    mobile=book.user.profile.mobile_number,
+                mobile = book.user.profile.mobile_number
+                message = "{} {}".format(alert.message, book.book.title)
+
+                service.send_alert(message=message, mobile=mobile)
+                logger.info(
+                    "Sent message to user {user} mobile number {mobile} with message {message}".format(
+                        user=book.user.username,
+                        mobile=mobile,
+                        message=message,
+                    )
                 )
