@@ -1,5 +1,13 @@
 # Bookworm
-Books reading list and reviews application
+
+[![Build Status](https://travis-ci.org/Silvian/bookworm.svg?branch=master)](https://travis-ci.org/Silvian/bookworm) ![AUR](https://img.shields.io/aur/license/yaourt.svg) ![PyPI - Django Version](https://img.shields.io/pypi/djversions/djangorestframework.svg)
+
+A simple books archiving application with reading list and notifications feature.
+Includes book reading progress tracking, multi user support and SMS Alerts notifications reminding you to pick up where you've left off.
+
+#### Contributors: Silvian Dragan and Laurence Green
+##### Published under GNU General Public Licence v3 - please read the LICENSE included.
+
 
 
 # Installation Guide:
@@ -34,4 +42,4 @@ Note: you can login with the default user created here at http://localhost:8000/
 # Tests:
 
 To run the test pack simply run:
-*docker-compose run --rm web python manage.py test*
+*./scripts/test.sh*
