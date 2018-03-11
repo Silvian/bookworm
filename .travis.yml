@@ -11,6 +11,7 @@ env:
 before_install:
   - touch .env
   - docker-compose build
+  - docker-compose run --rm web scripts/migrate_loaddata.sh
 
 script:
   - scripts/test.sh
