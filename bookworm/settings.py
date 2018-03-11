@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_celery_results',
     'rest_framework.authtoken',
     'rest_framework',
+    'django_filters',
     # Local apps
     'books.apps.BooksConfig',
     'alerts.apps.AlertsConfig',
@@ -134,9 +135,14 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
+    ),
+
+    # ... other configurations
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework.filters.SearchFilter',
+        'django_filters.rest_framework.DjangoFilterBackend',
     )
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
