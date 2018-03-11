@@ -43,3 +43,9 @@ Note: you can login with the default user created here at http://localhost:8000/
 
 To run the test pack simply run:
 *./scripts/test.sh*
+
+
+# Search:
+
+Applied to books
+*http://localhost:8000/books/book/?search=pride*
