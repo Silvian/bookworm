@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     # Local apps
     'books.apps.BooksConfig',
+    'alerts.apps.AlertsConfig',
 ]
 
 MIDDLEWARE = [
@@ -170,6 +171,11 @@ CELERY_TIMEZONE = 'Europe/London'
 
 # Django celery results configurations
 CELERY_RESULT_BACKEND = 'django-db'
+
+
+# SMS Service credentials
+SMS_URL = os.getenv('SMS_URL', default="https://textbelt.com/text")
+SMS_TOKEN = os.getenv('SMS_TOKEN', default="textbelt")
 
 
 # Load local environment specific settings

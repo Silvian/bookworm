@@ -185,6 +185,41 @@ class ReadingList(models.Model):
         return self.book.title
 
 
+class Profile(models.Model):
+    """Profile model."""
+
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+    )
+    mobile_number = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True,
+    )
+    birth_date = models.DateField(
+        null=True,
+        blank=True,
+    )
+
+    def __str__(self):
+        """Return the string representation."""
+        return self.user.username
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    """Create profile when an user instance is created."""
+    if created:
+        Profile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    """Update profile when user is updated."""
+    instance.profile.save()
+
+
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     """Generate authentication API token for a created user instance."""
