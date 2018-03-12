@@ -4,7 +4,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.utils import timezone
+from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from django_common.auth_backends import User
 from model_utils import Choices
@@ -76,7 +76,7 @@ class Book(models.Model):
     description = models.TextField(
         blank=True,
     )
-    pages = models.IntegerField(
+    pages = models.PositiveIntegerField(
         blank=True,
         null=True,
     )
@@ -122,6 +122,9 @@ class Favourite(models.Model):
         on_delete=models.PROTECT,
     )
 
+    class Meta:
+        unique_together = ('book', 'user')
+
     def __str__(self):
         """Return the string representation."""
         return self.book.title
@@ -158,14 +161,14 @@ class ReadingList(models.Model):
 
     def mark_date_started(self):
         """Mark date when book was started."""
-        self.started_date = timezone.now()
+        self.started_date = now().date()
 
     def mark_date_read(self):
         """Mark date when book was read."""
-        self.finished_date = timezone.now()
+        self.finished_date = now().date()
 
-    def clean_fields(self, exclude=None):
-        """Clean the fields needed for django admin."""
+    def save(self, *args, **kwargs):
+        """Override to perform validations."""
         if self.started_reading:
             self.mark_date_started()
         if self.finished_reading:
@@ -174,7 +177,7 @@ class ReadingList(models.Model):
                 self.started_reading = True
             if not self.started_date:
                 self.mark_date_started()
-        super().clean_fields(exclude=exclude)
+        super().save(*args, **kwargs)
 
     def publish(self):
         """Publish reading list."""
