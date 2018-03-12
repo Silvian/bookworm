@@ -16,8 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import (path, include)
 
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='Bookworm API')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('books/', include('books.urls')),
+    path('', schema_view),
 ]
