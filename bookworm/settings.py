@@ -14,6 +14,8 @@ from __future__ import absolute_import
 
 import os
 
+from celery.schedules import crontab
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -168,6 +170,17 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Europe/London'
+
+
+# Celery cron scheduling
+
+CELERY_BEAT_SCHEDULE = {
+    'send_sms_alert': {
+        'task': 'alerts.tasks.send_sms_alert',
+        'schedule': crontab(minute='15', hour='19'),
+    },
+}
+
 
 # Django celery results configurations
 CELERY_RESULT_BACKEND = 'django-db'
