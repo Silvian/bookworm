@@ -11,6 +11,30 @@ from model_utils import Choices
 
 from rest_framework.authtoken.models import Token
 
+from taggit.managers import TaggableManager
+
+
+class Tag(models.Model):
+    """Tag model."""
+
+    copy = models.CharField(
+        max_length=200,
+    )
+    slug = models.SlugField()
+    created_at = models.DateTimeField(
+        auto_now_add=False,
+    )
+    tags = models.ManyToManyField(
+        'Tag',
+        related_name="+",
+        verbose_name=_('tags'),
+        blank=True,
+    )
+
+    def __str__(self):
+        """Return the string representation."""
+        return self.name
+
 
 class Author(models.Model):
     """Author model."""
@@ -96,6 +120,12 @@ class Book(models.Model):
     published_date = models.DateField(
         blank=True,
         null=True,
+    )
+    tags = models.ManyToManyField(
+        'Tag',
+        related_name="book_tags+",
+        verbose_name=_('tags'),
+        blank=True,
     )
 
     def publish(self):
