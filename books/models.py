@@ -15,14 +15,17 @@ from taggit.managers import TaggableManager
 
 
 class Tag(models.Model):
-    """Tag model."""
+    """Tag model.
+
+    Consider an extension of tags to allow tagging with all media types.
+    """
 
     copy = models.CharField(
         max_length=200,
     )
     slug = models.SlugField()
     created_at = models.DateTimeField(
-        auto_now_add=False,
+        auto_now_add=True,
     )
     tags = models.ManyToManyField(
         'Tag',
@@ -34,6 +37,28 @@ class Tag(models.Model):
     def __str__(self):
         """Return the string representation."""
         return self.name
+
+
+class Meta(models.Model):
+    """Meta model."""
+
+    key = models.CharField(
+        max_length=200,
+    )
+    value = models.TextField()
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+    modified_at = models.DateTimeField(
+        auto_now=True,
+        auto_now_add=False,
+    )
+    tags = models.ManyToManyField(
+        'Tag',
+        related_name="meta_tags+",
+        verbose_name=_('tags'),
+        blank=True,
+    )
 
 
 class Author(models.Model):
