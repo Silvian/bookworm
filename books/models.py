@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from bookworm.mixins import (PreserveModelMixin, ModifiedModelMixin)
-from profile.models import Profile
+from profiles.models import Profile
 from meta_info.models import MetaInfoMixin
 
 

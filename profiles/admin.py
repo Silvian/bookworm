@@ -1,9 +1,23 @@
 """Books admin."""
 
 from django.contrib import admin
-from .models import (
+from profiles.models import (
     Profile,
+    ContactMethod,
 )
+
+
+@admin.register(ContactMethod)
+class ContactMethodAdmin(admin.ModelAdmin):
+    """Profile admin."""
+
+    list_display = (
+        'type',
+        'detail',
+        'email',
+        'uri',
+        'profile',
+    )
 
 
 @admin.register(Profile)

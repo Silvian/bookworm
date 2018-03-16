@@ -3,7 +3,7 @@
 from rest_framework import serializers
 
 from meta_info.serializers import MetaSerializer
-from profile.serializers import ProfileSerializer
+from profiles.serializers import ProfileSerializer
 
 from books.models import (
     Book,

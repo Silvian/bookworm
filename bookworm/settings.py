@@ -49,9 +49,9 @@ INSTALLED_APPS = [
     # Local apps
     'bookworm',
     'books.apps.BooksConfig',
+    'profiles.apps.ProfileConfig',
     'alerts.apps.AlertsConfig',
     'meta_info.apps.MetaInfoConfig',
-    'profile.apps.ProfileConfig',
 ]
 
 MIDDLEWARE = [

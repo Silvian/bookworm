@@ -1,6 +1,6 @@
 from rest_framework import routers
 
-from profile.views import (
+from profiles.views import (
     ProfileViewSet,
     ContactMethodViewSet,
 )

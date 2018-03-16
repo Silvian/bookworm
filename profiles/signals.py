@@ -6,7 +6,7 @@ from django.dispatch import receiver
 from django_common.auth_backends import User
 
 from meta_info.models import (Tag, MetaInfo)
-from profile.models import (Profile, ContactMethod)
+from profiles.models import (Profile, ContactMethod)
 
 from rest_framework.authtoken.models import Token
 

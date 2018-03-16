@@ -23,6 +23,6 @@ schema_view = get_swagger_view(title='Bookworm API')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('books/', include('books.urls')),
-    path('account/', include('profile.urls')),
+    # path('account/', include('profiles.urls')),
     path('', schema_view),
 ]
