@@ -2,106 +2,72 @@
 
 from rest_framework import serializers
 
+from meta_info.serializers import MetaSerializer
+from profile.serializers import ProfileSerializer
+
 from books.models import (
-    Author,
     Book,
-    Publisher,
-    ReadingList,
-    Favourite,
+    BookProgress,
+    BookReview,
 )
 
 
-class AuthorSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Author
-        fields = (
-            'id',
-            'name',
-            'description',
-        )
-        exclude = []
-
-
-class PublisherSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Publisher
-        fields = (
-            'id',
-            'name',
-            'description',
-        )
-        exclude = []
-
-
-class BookSerializer(serializers.ModelSerializer):
-    authors = AuthorSerializer(many=True)
-    publisher = PublisherSerializer()
-
+class BookSerializer(MetaSerializer):
     class Meta:
         model = Book
-        fields = (
+        read_only_fields = (
             'id',
+            'created_at',
+            'modified_at',
+            'deleted_at',
+        )
+        fields = read_only_fields + (
             'title',
-            'genre',
             'description',
-            'pages',
-            'authors',
-            'publisher',
-            'published_date',
+            'reviews',
+            'meta',
         )
         exclude = []
 
-    def create(self, validated_data):
-        """Create author and publisher."""
-        publisher_data = validated_data.pop('publisher')
-        publisher = Publisher.objects.create(**publisher_data)
-        validated_data['publisher'] = publisher
-        authors_data = validated_data.pop('authors')
-        book = Book.objects.create(**validated_data)
-        for author in authors_data:
-            Author.objects.create(**author)
-        return book
 
-
-class ReadingListSerializer(serializers.ModelSerializer):
+class BookProgressSerializer(serializers.ModelSerializer):
+    book = BookSerializer()
+    profile = ProfileSerializer()
 
     class Meta:
-        model = ReadingList
+        model = BookProgress
         exclude = []
         read_only_fields = (
             'id',
-            'started_date',
-            'finished_date',
+            'created_at',
+            'modified_at',
+            'deleted_at',
+        )
+        fields = read_only_fields + (
+            'percent',
+            'page',
+            'progress',
+            'book',
+            'profile',
+        )
+
+
+class BookReviewSerializer(MetaSerializer):
+    book = BookSerializer()
+    progress = BookProgressSerializer()
+    profile = ProfileSerializer()
+
+    class Meta:
+        model = BookReview
+        read_only_fields = (
+            'id',
+            'created_at',
+            'modified_at',
+            'deleted_at',
         )
         fields = read_only_fields + (
             'book',
-            'started_reading',
-            'finished_reading',
-            'user',
-        )
-
-    def validate(self, attrs):
-        """Add or update favourites for authenticated user."""
-        request_user = self.context['request'].user
-        attrs['user'] = request_user
-        return super().validate(attrs)
-
-
-class FavouriteSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Favourite
-        fields = (
-            'id',
-            'book',
-            'user',
+            'progress',
+            'profile',
         )
         exclude = []
-
-    def validate(self, attrs):
-        """Add or update favourites for authenticated user."""
-        request_user = self.context['request'].user
-        attrs['user'] = request_user
-        return super().validate(attrs)

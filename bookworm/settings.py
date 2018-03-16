@@ -47,8 +47,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     # Local apps
+    'bookworm',
     'books.apps.BooksConfig',
     'alerts.apps.AlertsConfig',
+    'meta_info.apps.MetaInfoConfig',
+    'profile.apps.ProfileConfig',
 ]
 
 MIDDLEWARE = [
