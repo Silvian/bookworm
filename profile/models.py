@@ -1,0 +1,100 @@
+"""Profile models."""
+
+from django.conf import settings
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django_common.auth_backends import User
+
+from bookworm.mixins import PreserveModelMixin
+from meta_info.models import Meta
+
+from rest_framework.authtoken.models import Token
+
+
+class ContactMethod(Meta, PreserveModelMixin):
+    """Contact method."""
+
+    TYPES = Choices(
+        (0, 'email', _('email')),
+        (1, 'mobile', _('mobile number')),
+        (2, 'landline', _('landline number')),
+        (3, 'postal', _('postal address')),
+        (4, 'billing', _('billing address')),
+        (5, 'social', _('social network id')),
+    )
+
+    TAGS = Choices(
+        (0, 'primary', _('primary')),
+        (1, 'billing', _('billing')),
+    )
+
+    type = models.IntegerField(
+        choices=TYPES,
+        default=TYPES.email,
+    )
+    detail = models.TextField()
+    email = models.EmailField(
+        max_length=254,
+        unique=True,
+        blank=True,
+        null=True,
+    )
+    uri = models.URLField(
+        blank=True,
+        null=True,
+    )
+    profile = models.ForeignKey(
+        'Profile',
+        related_name="contacts",
+        verbose_name=_('Contact details profile'),
+        on_delete=models.DO_NOTHING,
+    )
+
+
+class Profile(PreserveModelMixin):
+    """Profile model."""
+
+    NAME_TITLES = Choices(
+        (0, 'mrs', _('Mrs')),
+        (1, 'mr', _('Mr')),
+        (2, 'miss', _('Miss')),
+        (3, 'ms', _('Ms')),
+        (4, 'dr', _('Dr')),
+        (5, 'sir', _('Sir')),
+    )
+
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+    )
+    name_title = models.IntegerField(
+        choices=NAME_TITLES,
+        blank=True,
+        null=True,
+    )
+    name_first = models.CharField(
+        max_length=64,
+    )
+    name_family = models.CharField(
+        max_length=64,
+    )
+    name_middle = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+    )
+    email = models.EmailField(
+        max_length=254,
+        unique=True,
+    )
+    birth_date = models.DateField(
+        null=True,
+        blank=True,
+    )
+    meta = models.ForeignKey(
+        Meta,
+        related_name="profile_meta+",
+        verbose_name=_('Profile meta data'),
+        on_delete=models.DO_NOTHING,
+    )
