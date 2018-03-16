@@ -4,15 +4,18 @@ from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils.translation import ugettext_lazy as _
 from django_common.auth_backends import User
 
-from bookworm.mixins import PreserveModelMixin
-from meta_info.models import Meta
+from model_utils import Choices
+
+from bookworm.mixins import (PreserveModelMixin, ModifiedModelMixin)
+from meta_info.models import (MetaInfoMixin, MetaInfo)
 
 from rest_framework.authtoken.models import Token
 
 
-class ContactMethod(Meta, PreserveModelMixin):
+class ContactMethod(MetaInfoMixin, PreserveModelMixin, ModifiedModelMixin):
     """Contact method."""
 
     TYPES = Choices(
@@ -33,9 +36,12 @@ class ContactMethod(Meta, PreserveModelMixin):
         choices=TYPES,
         default=TYPES.email,
     )
-    detail = models.TextField()
+    detail = models.TextField(
+        db_index=True,
+    )
     email = models.EmailField(
         max_length=254,
+        db_index=True,
         unique=True,
         blank=True,
         null=True,
@@ -52,7 +58,7 @@ class ContactMethod(Meta, PreserveModelMixin):
     )
 
 
-class Profile(PreserveModelMixin):
+class Profile(PreserveModelMixin, ModifiedModelMixin):
     """Profile model."""
 
     NAME_TITLES = Choices(
@@ -75,25 +81,31 @@ class Profile(PreserveModelMixin):
     )
     name_first = models.CharField(
         max_length=64,
+        db_index=True,
     )
     name_family = models.CharField(
         max_length=64,
+        db_index=True,
     )
     name_middle = models.CharField(
         max_length=128,
         blank=True,
         null=True,
     )
+    name_display = models.CharField(
+        max_length=254,
+    )
     email = models.EmailField(
         max_length=254,
+        db_index=True,
         unique=True,
     )
     birth_date = models.DateField(
         null=True,
         blank=True,
     )
-    meta = models.ForeignKey(
-        Meta,
+    meta_info = models.ForeignKey(
+        MetaInfo,
         related_name="profile_meta+",
         verbose_name=_('Profile meta data'),
         on_delete=models.DO_NOTHING,

@@ -4,13 +4,13 @@ from rest_framework import (viewsets, filters)
 
 from books.models import (
     Book,
-    ReadingList,
-    Favourite,
+    BookProgress,
+    BookReview,
 )
 from books.serializers import (
     BookSerializer,
-    ReadingListSerializer,
-    FavouriteSerializer,
+    BookProgressSerializer,
+    BookReviewSerializer,
 )
 
 
@@ -21,21 +21,11 @@ class BookViewSet(viewsets.ModelViewSet):
     search_fields = ('title',)
 
 
-class ReadingListViewSet(viewsets.ModelViewSet):
-    queryset = ReadingList.objects.all()
-    serializer_class = ReadingListSerializer
-
-    def get_queryset(self, request=None, *args, **kwargs):
-        """Return reading list objects filtered by user and book related."""
-        queryset = ReadingList.objects.filter(
-                user=self.request.user).prefetch_related('book')
-        return queryset
+class BookProgressViewSet(viewsets.ModelViewSet):
+    queryset = BookProgress.objects.all()
+    serializer_class = BookProgressSerializer
 
 
-class FavoriteViewSet(viewsets.ModelViewSet):
-    queryset = Favourite.objects.all()
-    serializer_class = FavouriteSerializer
-
-    def get_queryset(self):
-        """Return the queryset of favourites for this user."""
-        return Favourite.objects.filter(user=self.request.user)
+class BookReviewViewSet(viewsets.ModelViewSet):
+    queryset = BookReview.objects.all()
+    serializer_class = BookReviewSerializer

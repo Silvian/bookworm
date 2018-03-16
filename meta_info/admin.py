@@ -3,7 +3,7 @@
 from django.contrib import admin
 from .models import (
     Tag,
-    Meta,
+    MetaInfo,
 )
 
 
@@ -13,16 +13,17 @@ class TagAdmin(admin.ModelAdmin):
 
     list_display = (
         'slug',
-        'value',
+        'copy',
     )
-    search_fields = ('value',)
+    search_fields = ('copy',)
 
 
-@admin.register(Meta)
+@admin.register(MetaInfo)
 class ProfileAdmin(admin.ModelAdmin):
     """Profile admin."""
 
     list_display = (
-        'key',
-        'value',
+        'copy',
+        'json',
     )
+    search_fields = ('copy',)

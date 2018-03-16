@@ -11,7 +11,10 @@ class ProfileAdmin(admin.ModelAdmin):
     """Profile admin."""
 
     list_display = (
+        'name_title',
+        'name_first',
+        'name_family',
+        'name_display',
+        'email',
         'user',
-        'mobile_number',
-        'birth_date',
     )

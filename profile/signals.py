@@ -5,7 +5,7 @@ from django.db.models.signals import (pre_save, post_save)
 from django.dispatch import receiver
 from django_common.auth_backends import User
 
-from meta_info.models import (Tag, Meta)
+from meta_info.models import (Tag, MetaInfo)
 from profile.models import (Profile, ContactMethod)
 
 from rest_framework.authtoken.models import Token
@@ -41,10 +41,10 @@ def create_user_profile(sender, instance, created, **kwargs):
     """Create profile when an user instance is created."""
     if not created:
         return
-    meta = Meta()
+    meta_info = MetaInfo()
     Profile.objects.create(
         user=instance,
-        meta=meta,
+        meta_info=meta_info,
     )
 
 

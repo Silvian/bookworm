@@ -1,43 +1,12 @@
 """Books admin."""
 
 from django.contrib import admin
-from .models import (
-    Author,
-    Profile,
-    Publisher,
+
+from books.models import (
     Book,
-    Favourite,
-    ReadingList,
+    BookProgress,
+    BookReview,
 )
-
-
-@admin.register(Author)
-class AuthorAdmin(admin.ModelAdmin):
-    """Author admin."""
-
-    list_display = ('name',)
-
-    search_fields = ('name',)
-
-
-@admin.register(Profile)
-class ProfileAdmin(admin.ModelAdmin):
-    """Profile admin."""
-
-    list_display = (
-        'user',
-        'mobile_number',
-        'birth_date',
-    )
-
-
-@admin.register(Publisher)
-class PublisherAdmin(admin.ModelAdmin):
-    """Publisher admin."""
-
-    list_display = ('name',)
-
-    search_fields = ('name',)
 
 
 @admin.register(Book)
@@ -46,64 +15,44 @@ class BookAdmin(admin.ModelAdmin):
 
     list_display = (
         'title',
-        'genre',
-        'pages',
-        'publisher',
-        'published_date',
+        'description',
     )
 
     search_fields = (
         'title',
-        'genre',
-        'authors__name',
-        'publisher__name',
-        'published_date',
     )
 
-    list_filter = ('genre',)
+    list_filter = ('title',)
 
 
-@admin.register(Favourite)
-class Favourite(admin.ModelAdmin):
-    """Favourite admin."""
+@admin.register(BookProgress)
+class BookProgressAdmin(admin.ModelAdmin):
+    """BookProgress admin."""
 
-    list_display = ('book', 'user',)
+    list_display = ('book', 'profile',)
 
     search_fields = (
         'book__title',
-        'book__genre',
-        'book__authors__name',
-        'book__publisher__name',
-        'book__published_date',
-        'user__username',
+        'profile__user__username',
     )
 
-    list_filter = ('book__genre',)
+    list_filter = ('book__title',)
 
 
-@admin.register(ReadingList)
-class ReadingListAdmin(admin.ModelAdmin):
-    """ReadingList admin."""
+@admin.register(BookReview)
+class BookReviewAdmin(admin.ModelAdmin):
+    """BookReview admin."""
 
     list_display = (
         'book',
-        'started_reading',
-        'started_date',
-        'finished_reading',
-        'finished_date',
+        'copy',
     )
 
     search_fields = (
         'book__title',
-        'book__genre',
-        'book__authors__name',
-        'book__publisher__name',
-        'book__published_date',
-        'user__username',
+        'profile__user__username',
     )
 
     list_filter = (
-        'started_reading',
-        'finished_reading',
-        'book__genre',
+        'book__title',
     )

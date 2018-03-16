@@ -4,7 +4,7 @@ from rest_framework import serializers
 
 from meta_info.models import (
     Tag,
-    Meta,
+    MetaInfo,
 )
 
 
@@ -12,20 +12,27 @@ class TagSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tag
-        fields = (
+        read_only_fields = (
             'id',
+            'created_at',
+        )
+        fields = read_only_fields + (
             'slug',
             'copy',
         )
-        exclude = []
 
 
 class MetaSerializer(serializers.ModelSerializer):
+    tags = TagSerializer(many=True)
 
     class Meta:
-        model = Meta
-        fields = (
+        model = MetaInfo
+        read_only_fields = (
             'id',
+            'created_at',
+            'modified_at',
+        )
+        fields = read_only_fields + (
             'copy',
             'json',
             'tags',

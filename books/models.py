@@ -1,27 +1,19 @@
 """Books models."""
 
-from django.conf import settings
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
-from django_common.auth_backends import User
 
-from django.contrib.postgres.fields import HStoreField
-
-from model_utils import Choices
-
+from bookworm.mixins import (PreserveModelMixin, ModifiedModelMixin)
 from profile.models import Profile
+from meta_info.models import MetaInfoMixin
 
-from rest_framework.authtoken.models import Token
 
-
-class Book(Meta, PreserveModelMixin):
+class Book(MetaInfoMixin, PreserveModelMixin, ModifiedModelMixin):
     """Books model."""
 
     title = models.CharField(
         max_length=200,
+        db_index=True,
     )
     description = models.TextField(
         blank=True,
@@ -29,12 +21,9 @@ class Book(Meta, PreserveModelMixin):
     )
 
 
-class BookProgress(PreserveModelMixin):
+class BookProgress(PreserveModelMixin, ModifiedModelMixin):
     """Book progress model."""
 
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-    )
     percent = models.FloatField(
         blank=True,
         null=True,
@@ -48,9 +37,9 @@ class BookProgress(PreserveModelMixin):
         null=True,
     )
     book = models.ForeignKey(
-        'Book',
-        related_name="progress+",
-        verbose_name=_('Book'),
+        Book,
+        related_name='progress+',
+        verbose_name=_('Book progress'),
         on_delete=models.DO_NOTHING,
         blank=True,
     )
@@ -60,19 +49,19 @@ class BookProgress(PreserveModelMixin):
     )
 
 
-class BookReview(Meta, PreserveModelMixin):
+class BookReview(MetaInfoMixin, PreserveModelMixin, ModifiedModelMixin):
     """Book reviews model."""
 
     book = models.ForeignKey(
-        'Book',
-        related_name="reviews",
-        verbose_name=_('Book'),
+        Book,
+        related_name='reviews',
+        verbose_name=_('Book reviews'),
         on_delete=models.PROTECT,
     )
     progress = models.ForeignKey(
         'BookProgress',
-        related_name="review_progress",
-        verbose_name=_('Book Progress'),
+        related_name='review',
+        verbose_name=_('Book review Progress'),
         on_delete=models.DO_NOTHING,
         blank=True,
     )

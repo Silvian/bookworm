@@ -7,6 +7,10 @@ from django.utils.timezone import now
 from bookworm.managers import PreserveModelManager
 
 
+def get_default_now():
+    return now(USE_TZ=True)
+
+
 class ModifiedModelMixin(models.Model):
     """Modified field mixin.
     """
@@ -15,12 +19,15 @@ class ModifiedModelMixin(models.Model):
         auto_now_add=True,
     )
     modified_at = models.DateTimeField(
-        auto_now=True,
         auto_now_add=False,
+        auto_now=True,
     )
 
+    class Meta:
+        abstract=True
 
-class PreserveModelMixin(ModifiedModelMixin):
+
+class PreserveModelMixin(models.Model):
     """Base model to handle core objects.
 
     Defines created, modified, and deleted fields.
@@ -31,9 +38,13 @@ class PreserveModelMixin(ModifiedModelMixin):
         auto_now=False,
         auto_now_add=False,
         blank=True,
+        null=True,
     )
 
     objects = PreserveModelManager()
+
+    class Meta:
+        abstract=True
 
     def delete(self, *args, **kwargs):
         instance.deleted_at = now(USE_TZ=True)

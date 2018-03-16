@@ -14,11 +14,13 @@ class Tag(models.Model):
     """
 
     slug = models.SlugField(
+        db_index=True,
         unique=True,
     )
     slug_u = models.SlugField()
     copy = models.CharField(
         max_length=200,
+        db_index=True,
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
@@ -27,25 +29,35 @@ class Tag(models.Model):
         'Tag',
         related_name="tag_tags+",
         verbose_name=_('Tags'),
-        on_delete=models.DO_NOTHING,
         blank=True,
     )
 
 
-class Meta(ModifiedModelMixin):
-    """Meta model."""
+class MetaInfoMixin(models.Model):
+    """Meta mixin model."""
 
-    copy = models.TextField()
-    json = JSONField(
+    copy = models.TextField(
+        db_index=True,
         blank=True,
+        null=True,
+    )
+    json = JSONField(
+        default={},
     )
     tags = models.ManyToManyField(
-        'Tag',
+        Tag,
         related_name="tags+",
         verbose_name=_('Tags'),
-        on_delete=models.DO_NOTHING,
         blank=True,
     )
+
+    class Meta:
+        abstract=True
+
+
+class MetaInfo(MetaInfoMixin, ModifiedModelMixin):
+    """Meta model."""
+    pass
 
 
 # meta_information_example = {

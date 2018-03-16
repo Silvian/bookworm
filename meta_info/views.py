@@ -4,7 +4,7 @@ from rest_framework import (viewsets, filters)
 
 from meta_info.models import (
     Tag,
-    Meta,
+    MetaInfo,
 )
 from meta_info.serializers import (
     TagSerializer,
@@ -20,5 +20,5 @@ class TagViewSet(viewsets.ModelViewSet):
 
 
 class MetaViewSet(viewsets.ModelViewSet):
-    queryset = Meta.objects.all()
+    queryset = MetaInfo.objects.all()
     serializer_class = MetaSerializer
