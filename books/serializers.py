@@ -11,6 +11,16 @@ from books.models import (
 )
 
 
+class UserValidateModelSerializerMixin(serializers.ModelSerializer):
+    """Provide a mixin for user validation used within serializers."""
+
+    def validate(self, attrs):
+        """Add or update favourites for authenticated user."""
+        request_user = self.context['request'].user
+        attrs['user'] = request_user
+        return super().validate(attrs)
+
+
 class AuthorSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -65,7 +75,7 @@ class BookSerializer(serializers.ModelSerializer):
         return book
 
 
-class ReadingListSerializer(serializers.ModelSerializer):
+class ReadingListSerializer(UserValidateModelSerializerMixin):
 
     class Meta:
         model = ReadingList
@@ -82,14 +92,8 @@ class ReadingListSerializer(serializers.ModelSerializer):
             'user',
         )
 
-    def validate(self, attrs):
-        """Add or update favourites for authenticated user."""
-        request_user = self.context['request'].user
-        attrs['user'] = request_user
-        return super().validate(attrs)
 
-
-class FavouriteSerializer(serializers.ModelSerializer):
+class FavouriteSerializer(UserValidateModelSerializerMixin):
 
     class Meta:
         model = Favourite
@@ -99,9 +103,3 @@ class FavouriteSerializer(serializers.ModelSerializer):
             'user',
         )
         exclude = []
-
-    def validate(self, attrs):
-        """Add or update favourites for authenticated user."""
-        request_user = self.context['request'].user
-        attrs['user'] = request_user
-        return super().validate(attrs)
