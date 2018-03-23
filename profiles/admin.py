@@ -16,7 +16,7 @@ class ContactMethodAdmin(admin.ModelAdmin):
         'detail',
         'email',
         'uri',
-        'profile',
+        'profile__id',
     )
 
 
@@ -30,5 +30,4 @@ class ProfileAdmin(admin.ModelAdmin):
         'name_family',
         'name_display',
         'email',
-        'user',
     )

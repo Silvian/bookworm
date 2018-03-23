@@ -3,6 +3,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from hashid_field import HashidAutoField
+
 from bookworm.mixins import (PreserveModelMixin, ModifiedModelMixin)
 from profiles.models import Profile
 from meta_info.models import MetaInfoMixin
@@ -11,6 +13,10 @@ from meta_info.models import MetaInfoMixin
 class Book(MetaInfoMixin, PreserveModelMixin, ModifiedModelMixin):
     """Books model."""
 
+    id = HashidAutoField(
+        primary_key=True,
+        min_length=10,
+    )
     title = models.CharField(
         max_length=200,
         db_index=True,

@@ -31,5 +31,5 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self, request=None, *args, **kwargs):
         """Return reading list objects filtered by user and book related."""
-        queryset = ReadingList.objects.filter(user=self.request.user)
+        queryset = Profile.objects.filter(user=self.request.user)
         return queryset
