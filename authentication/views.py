@@ -2,11 +2,11 @@
 
 from rest_framework import (viewsets, filters)
 
-from profiles.models import (
+from authentication.models import (
     ContactMethod,
     Profile,
 )
-from profiles.serializers import (
+from authentication.serializers import (
     ContactMethodSerializer,
     ProfileSerializer,
 )

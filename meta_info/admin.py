@@ -12,6 +12,7 @@ class TagAdmin(admin.ModelAdmin):
     """Tag admin."""
 
     list_display = (
+        'id',
         'slug',
         'copy',
     )
@@ -23,6 +24,7 @@ class ProfileAdmin(admin.ModelAdmin):
     """Profile admin."""
 
     list_display = (
+        'id',
         'copy',
         'json',
     )

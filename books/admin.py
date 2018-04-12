@@ -14,6 +14,7 @@ class BookAdmin(admin.ModelAdmin):
     """Book admin."""
 
     list_display = (
+        'id',
         'title',
         'description',
     )
@@ -29,7 +30,11 @@ class BookAdmin(admin.ModelAdmin):
 class BookProgressAdmin(admin.ModelAdmin):
     """BookProgress admin."""
 
-    list_display = ('book', 'profile',)
+    list_display = (
+        'id',
+        'book',
+        'profile',
+    )
 
     search_fields = (
         'book__title',
@@ -44,6 +49,7 @@ class BookReviewAdmin(admin.ModelAdmin):
     """BookReview admin."""
 
     list_display = (
+        'id',
         'book',
         'copy',
     )

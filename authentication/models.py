@@ -1,18 +1,14 @@
 """Profile models."""
 
-from django.conf import settings
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from django_common.auth_backends import User
 
 from model_utils import Choices
+from hashid_field import HashidAutoField
 
 from bookworm.mixins import (PreserveModelMixin, ModifiedModelMixin)
 from meta_info.models import (MetaInfoMixin, MetaInfo)
-
-from rest_framework.authtoken.models import Token
 
 
 class ContactMethod(MetaInfoMixin, PreserveModelMixin, ModifiedModelMixin):
@@ -28,8 +24,8 @@ class ContactMethod(MetaInfoMixin, PreserveModelMixin, ModifiedModelMixin):
     )
 
     TAGS = Choices(
-        (0, 'primary', _('primary')),
-        (1, 'billing', _('billing')),
+        ('primary', _('primary')),
+        ('billing', _('billing')),
     )
 
     type = models.IntegerField(
@@ -57,6 +53,10 @@ class ContactMethod(MetaInfoMixin, PreserveModelMixin, ModifiedModelMixin):
         on_delete=models.DO_NOTHING,
     )
 
+    class Meta:
+        verbose_name = 'Contact Method'
+        verbose_name_plural = 'Contact Methods'
+
 
 class Profile(PreserveModelMixin, ModifiedModelMixin):
     """Profile model."""
@@ -70,6 +70,7 @@ class Profile(PreserveModelMixin, ModifiedModelMixin):
         (5, 'sir', _('Sir')),
     )
 
+    id = HashidAutoField(primary_key=True)
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -110,3 +111,7 @@ class Profile(PreserveModelMixin, ModifiedModelMixin):
         verbose_name=_('Profile meta data'),
         on_delete=models.DO_NOTHING,
     )
+
+    class Meta:
+        verbose_name = 'Profile'
+        verbose_name_plural = 'Profiles'

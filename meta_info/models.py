@@ -4,6 +4,8 @@ from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from hashid_field import HashidAutoField
+
 from bookworm.mixins import ModifiedModelMixin
 
 
@@ -13,11 +15,15 @@ class Tag(models.Model):
     Consider an extension of tags to allow tagging with all media types.
     """
 
+    id = HashidAutoField(primary_key=True)
     slug = models.SlugField(
         db_index=True,
         unique=True,
+        blank=True,
     )
-    slug_u = models.SlugField()
+    slug_u = models.SlugField(
+        blank=True,
+    )
     copy = models.CharField(
         max_length=200,
         db_index=True,
@@ -32,10 +38,15 @@ class Tag(models.Model):
         blank=True,
     )
 
+    class Meta:
+        verbose_name = 'Tag'
+        verbose_name_plural = 'Tags'
+
 
 class MetaInfoMixin(models.Model):
     """Meta mixin model."""
 
+    id = HashidAutoField(primary_key=True)
     copy = models.TextField(
         db_index=True,
         blank=True,
@@ -43,6 +54,7 @@ class MetaInfoMixin(models.Model):
     )
     json = JSONField(
         default={},
+        blank=True,
     )
     tags = models.ManyToManyField(
         Tag,
@@ -52,12 +64,15 @@ class MetaInfoMixin(models.Model):
     )
 
     class Meta:
-        abstract=True
+        abstract = True
 
 
 class MetaInfo(MetaInfoMixin, ModifiedModelMixin):
     """Meta model."""
-    pass
+
+    class Meta:
+        verbose_name = 'Meta'
+        verbose_name_plural = 'Metas'
 
 
 # meta_information_example = {

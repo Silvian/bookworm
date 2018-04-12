@@ -6,17 +6,13 @@ from django.utils.translation import ugettext_lazy as _
 from hashid_field import HashidAutoField
 
 from bookworm.mixins import (PreserveModelMixin, ModifiedModelMixin)
-from profiles.models import Profile
+from authentication.models import Profile
 from meta_info.models import MetaInfoMixin
 
 
 class Book(MetaInfoMixin, PreserveModelMixin, ModifiedModelMixin):
     """Books model."""
 
-    id = HashidAutoField(
-        primary_key=True,
-        min_length=10,
-    )
     title = models.CharField(
         max_length=200,
         db_index=True,
@@ -26,10 +22,15 @@ class Book(MetaInfoMixin, PreserveModelMixin, ModifiedModelMixin):
         null=True,
     )
 
+    class Meta:
+        verbose_name = 'Book'
+        verbose_name_plural = 'Books'
+
 
 class BookProgress(PreserveModelMixin, ModifiedModelMixin):
     """Book progress model."""
 
+    id = HashidAutoField(primary_key=True)
     percent = models.FloatField(
         blank=True,
         null=True,
@@ -54,6 +55,10 @@ class BookProgress(PreserveModelMixin, ModifiedModelMixin):
         on_delete=models.DO_NOTHING,
     )
 
+    class Meta:
+        verbose_name = 'Book progress'
+        verbose_name_plural = 'Book\'s progress'
+
 
 class BookReview(MetaInfoMixin, PreserveModelMixin, ModifiedModelMixin):
     """Book reviews model."""
@@ -75,3 +80,7 @@ class BookReview(MetaInfoMixin, PreserveModelMixin, ModifiedModelMixin):
         Profile,
         on_delete=models.DO_NOTHING,
     )
+
+    class Meta:
+        verbose_name = 'Book review'
+        verbose_name_plural = 'Book\'s review'

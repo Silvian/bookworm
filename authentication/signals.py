@@ -6,7 +6,7 @@ from django.dispatch import receiver
 from django_common.auth_backends import User
 
 from meta_info.models import (Tag, MetaInfo)
-from profiles.models import (Profile, ContactMethod)
+from authentication.models import (Profile, ContactMethod)
 
 from rest_framework.authtoken.models import Token
 
@@ -19,7 +19,7 @@ def pre_save_contact_method(sender, instance, *args, **kwargs):
 
 
 @receiver(post_save, sender=ContactMethod)
-def pre_save_contact_method(sender, instance, *args, **kwargs):
+def post_save_contact_method(sender, instance, *args, **kwargs):
     """Set b y default the primary tag for ContactMethod."""
     require_primary = [
         ContactMethod.TYPES.email,

@@ -2,7 +2,7 @@ from rest_framework import routers
 
 from meta_info.views import (
     TagViewSet,
-    MetaListViewSet,
+    MetaViewSet,
 )
 
 

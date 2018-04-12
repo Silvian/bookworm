@@ -2,7 +2,7 @@
 
 from rest_framework import serializers
 
-from profiles.models import (
+from authentication.models import (
     Profile,
     ContactMethod,
 )

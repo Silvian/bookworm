@@ -1,7 +1,7 @@
 """Books admin."""
 
 from django.contrib import admin
-from profiles.models import (
+from authentication.models import (
     Profile,
     ContactMethod,
 )
@@ -12,11 +12,11 @@ class ContactMethodAdmin(admin.ModelAdmin):
     """Profile admin."""
 
     list_display = (
+        'id',
         'type',
         'detail',
         'email',
         'uri',
-        'profile__id',
     )
 
 
@@ -25,6 +25,7 @@ class ProfileAdmin(admin.ModelAdmin):
     """Profile admin."""
 
     list_display = (
+        'id',
         'name_title',
         'name_first',
         'name_family',

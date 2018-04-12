@@ -47,10 +47,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     # Local apps
-    'bookworm',
+    # 'bookworm',
+    # 'profiles',
+    # 'alerts.apps.AlertsConfig',
+    'authentication.apps.AuthenticationConfig',
     'books.apps.BooksConfig',
-    'profiles.apps.ProfileConfig',
-    'alerts.apps.AlertsConfig',
     'meta_info.apps.MetaInfoConfig',
 ]
 
