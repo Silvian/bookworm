@@ -13,6 +13,7 @@ django-rest-swagger==2.1.2
 djangorestframework==3.7.7
 factory-boy==2.9.2
 Faker==0.8.10
+gunicorn==19.7.1
 idna==2.6
 kombu==4.1.0
 Markdown==2.6.11
