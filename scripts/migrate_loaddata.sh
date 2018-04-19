@@ -14,4 +14,5 @@ echo "Creating default sms alert configurations..."
 python manage.py createsmsalert
 
 echo "Load development data from fixtures..."
+python manage.py loaddata localisation_data.json
 python manage.py loaddata development_fixture.json

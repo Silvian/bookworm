@@ -3,15 +3,48 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from model_utils import Choices
 from hashid_field import HashidAutoField
 
-from bookworm.mixins import (PreserveModelMixin, ModifiedModelMixin)
+from bookworm.mixins import PreserveModelMixin
 from authentication.models import Profile
 from meta_info.models import MetaInfoMixin
 
 
-class Book(MetaInfoMixin, PreserveModelMixin, ModifiedModelMixin):
-    """Books model."""
+GENRES = (
+    'Action',
+    'Adventure',
+    'Romance',
+    'Fiction',
+    'Fantasy',
+    'Non Fiction',
+    'Science Fiction',
+    'Satire',
+    'Drama',
+    'Mystery',
+    'Poetry',
+    'Comics',
+    'Horror',
+    'Art',
+    'Diaries',
+    'Guide',
+    'Travel',
+)
+TAGS = (
+    'genre',
+    'author',
+    'publisher',
+    'isbn',
+    'collaborator',
+    'collaborators',
+    'distributor',
+    'published date',
+    'publication issue',
+) + GENRES
+
+
+class PublicationMixin(models.Model):
+    """Publication mixin."""
 
     title = models.CharField(
         max_length=200,
@@ -19,27 +52,49 @@ class Book(MetaInfoMixin, PreserveModelMixin, ModifiedModelMixin):
     )
     description = models.TextField(
         blank=True,
-        null=True,
     )
+    isbn = models.CharField(
+        max_length=200,
+        db_index=True,
+        blank=True,
+    )
+
+    class Meta:
+        abstract = True
+
+
+class ProfileReferredMixin(models.Model):
+    """Profile association mixin."""
+
+    profile = models.ForeignKey(
+        Profile,
+        related_name='+',
+        on_delete=models.DO_NOTHING,
+    )
+
+    class Meta:
+        abstract = True
+
+
+class Book(PublicationMixin, MetaInfoMixin, PreserveModelMixin):
+    """Books model."""
 
     class Meta:
         verbose_name = 'Book'
         verbose_name_plural = 'Books'
 
 
-class BookProgress(PreserveModelMixin, ModifiedModelMixin):
+class BookProgress(ProfileReferredMixin, PreserveModelMixin):
     """Book progress model."""
 
     id = HashidAutoField(primary_key=True)
-    percent = models.FloatField(
-        blank=True,
-        null=True,
-    )
+    percent = models.FloatField()
     page = models.PositiveSmallIntegerField(
         blank=True,
         null=True,
     )
-    progress = models.BigIntegerField(
+    start = models.BigIntegerField()
+    end = models.BigIntegerField(
         blank=True,
         null=True,
     )
@@ -48,21 +103,87 @@ class BookProgress(PreserveModelMixin, ModifiedModelMixin):
         related_name='progress+',
         verbose_name=_('Book progress'),
         on_delete=models.DO_NOTHING,
-        blank=True,
-    )
-    profile = models.ForeignKey(
-        Profile,
-        on_delete=models.DO_NOTHING,
     )
 
     class Meta:
         verbose_name = 'Book progress'
-        verbose_name_plural = 'Book\'s progress'
+        verbose_name_plural = 'Books\' progress'
 
 
-class BookReview(MetaInfoMixin, PreserveModelMixin, ModifiedModelMixin):
+class PublicationFile(MetaInfoMixin, PreserveModelMixin):
+    """Publication file model."""
+
+    file = models.FileField()
+    book = models.ForeignKey(
+        Book,
+        related_name='files',
+        verbose_name=_('Books\' files'),
+        on_delete=models.DO_NOTHING,
+    )
+    extension = models.CharField(
+        max_length=20,
+        blank=True,
+    )
+    mime = models.CharField(
+        max_length=50,
+        blank=True,
+    )
+    progress = models.ForeignKey(
+        BookProgress,
+        related_name='file_progress+',
+        verbose_name=_('Files\' progress'),
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+    )
+
+    class Meta:
+        verbose_name = 'Publication File'
+        verbose_name_plural = 'Publications\' Files'
+
+
+class BookChapter(MetaInfoMixin, PreserveModelMixin):
+    """Book chapter model."""
+
+    title = models.CharField(
+        max_length=200,
+        db_index=True,
+    )
+    progress = models.ForeignKey(
+        BookProgress,
+        related_name='chapter_progress+',
+        verbose_name=_('Chapter location in book'),
+        on_delete=models.DO_NOTHING,
+        blank=True,
+    )
+    book = models.ForeignKey(
+        Book,
+        related_name='chapters',
+        verbose_name=_('Book chapters'),
+        on_delete=models.DO_NOTHING,
+    )
+
+    class Meta:
+        verbose_name = 'Book chapter'
+        verbose_name_plural = 'Books\' chapters'
+
+
+class BookReview(ProfileReferredMixin, MetaInfoMixin, PreserveModelMixin):
     """Book reviews model."""
 
+    TYPES = Choices(
+        (0, 'review', _('Review')),
+        (1, 'footnote', _('Footnote')),
+        (2, 'margin', _('Margin note')),
+        (3, 'line', _('Line highlight')),
+        (4, 'paragraph', _('Paragraph highlight')),
+    )
+
+    type = models.IntegerField(
+        choices=TYPES,
+        default=TYPES.review,
+        blank=True,
+    )
     book = models.ForeignKey(
         Book,
         related_name='reviews',
@@ -70,17 +191,13 @@ class BookReview(MetaInfoMixin, PreserveModelMixin, ModifiedModelMixin):
         on_delete=models.PROTECT,
     )
     progress = models.ForeignKey(
-        'BookProgress',
-        related_name='review',
+        BookProgress,
+        related_name='reviewed_at',
         verbose_name=_('Book review Progress'),
         on_delete=models.DO_NOTHING,
         blank=True,
     )
-    profile = models.ForeignKey(
-        Profile,
-        on_delete=models.DO_NOTHING,
-    )
 
     class Meta:
         verbose_name = 'Book review'
-        verbose_name_plural = 'Book\'s review'
+        verbose_name_plural = 'Books\' reviews'

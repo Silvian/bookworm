@@ -1,1 +1,1099 @@
-[{"model": "contenttypes.contenttype", "pk": 1, "fields": {"app_label": "admin", "model": "logentry"}}, {"model": "contenttypes.contenttype", "pk": 2, "fields": {"app_label": "auth", "model": "permission"}}, {"model": "contenttypes.contenttype", "pk": 3, "fields": {"app_label": "auth", "model": "group"}}, {"model": "contenttypes.contenttype", "pk": 4, "fields": {"app_label": "auth", "model": "user"}}, {"model": "contenttypes.contenttype", "pk": 5, "fields": {"app_label": "contenttypes", "model": "contenttype"}}, {"model": "contenttypes.contenttype", "pk": 6, "fields": {"app_label": "sessions", "model": "session"}}, {"model": "contenttypes.contenttype", "pk": 7, "fields": {"app_label": "django_celery_results", "model": "taskresult"}}, {"model": "contenttypes.contenttype", "pk": 8, "fields": {"app_label": "authtoken", "model": "token"}}, {"model": "contenttypes.contenttype", "pk": 9, "fields": {"app_label": "books", "model": "author"}}, {"model": "contenttypes.contenttype", "pk": 10, "fields": {"app_label": "books", "model": "book"}}, {"model": "contenttypes.contenttype", "pk": 11, "fields": {"app_label": "books", "model": "publisher"}}, {"model": "contenttypes.contenttype", "pk": 12, "fields": {"app_label": "books", "model": "readinglist"}}, {"model": "contenttypes.contenttype", "pk": 13, "fields": {"app_label": "books", "model": "favourite"}}, {"model": "sessions.session", "pk": "f55yc7mbvoosxc0oxo1rg0ia3ml277y8", "fields": {"session_data": "NGE3NmI1ZGRiODE5MzQwODE2MGQ5NjUyNDhiYmE0ZWEwMDk4NWNjZDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5ZTA1ZGJiOTQ4YjJiZmM5ZjgwNGU5N2M4YjY5Y2VjOGU0NGU3NzdmIn0=", "expire_date": "2018-03-19T21:09:51.971Z"}}, {"model": "sessions.session", "pk": "gq49l9cx6rt77wtme8m6wc9o0xbq7pyb", "fields": {"session_data": "NGE3NmI1ZGRiODE5MzQwODE2MGQ5NjUyNDhiYmE0ZWEwMDk4NWNjZDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5ZTA1ZGJiOTQ4YjJiZmM5ZjgwNGU5N2M4YjY5Y2VjOGU0NGU3NzdmIn0=", "expire_date": "2018-03-21T21:52:06.651Z"}}, {"model": "books.author", "pk": 1, "fields": {"name": "George Orwell", "description": ""}}, {"model": "books.author", "pk": 2, "fields": {"name": "Jane Austen", "description": ""}}, {"model": "books.author", "pk": 3, "fields": {"name": "Harper Lee", "description": ""}}, {"model": "books.author", "pk": 4, "fields": {"name": "Jules Verne", "description": ""}}, {"model": "books.author", "pk": 5, "fields": {"name": "Douglas Adams", "description": ""}}, {"model": "books.author", "pk": 6, "fields": {"name": "Eoin Colfer", "description": ""}}, {"model": "books.publisher", "pk": 1, "fields": {"name": "Houghton Mifflin Harcourt", "description": ""}}, {"model": "books.publisher", "pk": 2, "fields": {"name": "RD Bentley", "description": ""}}, {"model": "books.publisher", "pk": 3, "fields": {"name": "Best Selling Books", "description": ""}}, {"model": "books.publisher", "pk": 4, "fields": {"name": "Wordsworth Editions", "description": ""}}, {"model": "books.publisher", "pk": 5, "fields": {"name": "Pan", "description": ""}}, {"model": "books.book", "pk": 1, "fields": {"title": "1984", "genre": "fiction", "description": "In 1984, London is a grim city where Big Brother is always watching you, and Thought Police can practically read your mind. Winston is a man in grave danger for the simple reason that his memory still functions. Drawn into a forbidden love affair, Winston finds the courage to join a secret revolutionary organization called The Brotherhood, dedicated to the destruction of the Party. Together, with his beloved Julia, he hazards life in a deadly match against the powers that be.", "pages": 252, "publisher": 1, "published_date": "2017-01-30", "authors": [1]}}, {"model": "books.book", "pk": 2, "fields": {"title": "Pride and Prejudice", "genre": "fiction", "description": "", "pages": 340, "publisher": 2, "published_date": "1853-01-01", "authors": [2]}}, {"model": "books.book", "pk": 4, "fields": {"title": "To Kill a Mockingbird", "genre": "fiction", "description": "To Kill a Mockingbird follows the maturing of Scout in the 1930s as her father defends a wrongly charged man with rape and the exploration of the mysterious neighbor Boo Radley. This story has the realistic and sad elements of racial tension during the time and how non-accepting people were during the time. From the beginning to end it becomes apparent how much Scout matures, but also how her brother Jem does as well. The themes of friendship, acceptance, racial tension, justice, growing up, and taking a stand are what helps to make this story powerful.", "pages": 281, "publisher": 3, "published_date": null, "authors": [3]}}, {"model": "books.book", "pk": 5, "fields": {"title": "Twenty Thousand Leagues Under the Sea", "genre": "adventure", "description": "An American frigate, tracking down a ship-sinking monster, faces not a living creature but an incredible invention -- a fantastic submarine commanded by the mysterious Captain Nemo. Suddenly a devastating explosion leaves just three survivors who find themselves prisoners in Nemo's death ship on an underwater odyssey around the world, as Captain Nemo -- one of the most horrible villains ever created -- takes his revenge out on society. This novel, written in 1870, foretells with uncanny accuracy the inventions and advanced technology of the 20th century, and has become a literary stepping-stone for generations of science-fiction writers.", "pages": 245, "publisher": 4, "published_date": "1870-06-20", "authors": [4]}}, {"model": "books.book", "pk": 6, "fields": {"title": "The Hitchhiker's Guide to the Galaxy", "genre": "science-fiction", "description": "Thirty years of celebrating the comic genius of Douglas Adams... On 12 October 1979, the most remarkable book ever to come out of the great publishing corporations of Ursa Minor (and Earth) was made available to humanity - The Hitchhiker's Guide to the Galaxy. It's an ordinary Thursday lunchtime for Arthur Dent until his house gets demolished. The Earth follows shortly afterwards to make way for a new hyperspace bypass and his best friend has just announced that he's an alien. At this moment, they're hurtling through space with nothing but their towels and an innocuous-looking book inscribed with the big, friendly words: DON'T PANIC. The weekend has only just begun... Volume one in the trilogy of five.", "pages": 180, "publisher": 5, "published_date": "1995-11-20", "authors": [5, 6]}}, {"model": "auth.permission", "pk": 1, "fields": {"name": "Can add log entry", "content_type": 1, "codename": "add_logentry"}}, {"model": "auth.permission", "pk": 2, "fields": {"name": "Can change log entry", "content_type": 1, "codename": "change_logentry"}}, {"model": "auth.permission", "pk": 3, "fields": {"name": "Can delete log entry", "content_type": 1, "codename": "delete_logentry"}}, {"model": "auth.permission", "pk": 4, "fields": {"name": "Can add permission", "content_type": 2, "codename": "add_permission"}}, {"model": "auth.permission", "pk": 5, "fields": {"name": "Can change permission", "content_type": 2, "codename": "change_permission"}}, {"model": "auth.permission", "pk": 6, "fields": {"name": "Can delete permission", "content_type": 2, "codename": "delete_permission"}}, {"model": "auth.permission", "pk": 7, "fields": {"name": "Can add group", "content_type": 3, "codename": "add_group"}}, {"model": "auth.permission", "pk": 8, "fields": {"name": "Can change group", "content_type": 3, "codename": "change_group"}}, {"model": "auth.permission", "pk": 9, "fields": {"name": "Can delete group", "content_type": 3, "codename": "delete_group"}}, {"model": "auth.permission", "pk": 10, "fields": {"name": "Can add user", "content_type": 4, "codename": "add_user"}}, {"model": "auth.permission", "pk": 11, "fields": {"name": "Can change user", "content_type": 4, "codename": "change_user"}}, {"model": "auth.permission", "pk": 12, "fields": {"name": "Can delete user", "content_type": 4, "codename": "delete_user"}}, {"model": "auth.permission", "pk": 13, "fields": {"name": "Can add content type", "content_type": 5, "codename": "add_contenttype"}}, {"model": "auth.permission", "pk": 14, "fields": {"name": "Can change content type", "content_type": 5, "codename": "change_contenttype"}}, {"model": "auth.permission", "pk": 15, "fields": {"name": "Can delete content type", "content_type": 5, "codename": "delete_contenttype"}}, {"model": "auth.permission", "pk": 16, "fields": {"name": "Can add session", "content_type": 6, "codename": "add_session"}}, {"model": "auth.permission", "pk": 17, "fields": {"name": "Can change session", "content_type": 6, "codename": "change_session"}}, {"model": "auth.permission", "pk": 18, "fields": {"name": "Can delete session", "content_type": 6, "codename": "delete_session"}}, {"model": "auth.permission", "pk": 19, "fields": {"name": "Can add task result", "content_type": 7, "codename": "add_taskresult"}}, {"model": "auth.permission", "pk": 20, "fields": {"name": "Can change task result", "content_type": 7, "codename": "change_taskresult"}}, {"model": "auth.permission", "pk": 21, "fields": {"name": "Can delete task result", "content_type": 7, "codename": "delete_taskresult"}}, {"model": "auth.permission", "pk": 22, "fields": {"name": "Can add Token", "content_type": 8, "codename": "add_token"}}, {"model": "auth.permission", "pk": 23, "fields": {"name": "Can change Token", "content_type": 8, "codename": "change_token"}}, {"model": "auth.permission", "pk": 24, "fields": {"name": "Can delete Token", "content_type": 8, "codename": "delete_token"}}, {"model": "auth.permission", "pk": 25, "fields": {"name": "Can add author", "content_type": 9, "codename": "add_author"}}, {"model": "auth.permission", "pk": 26, "fields": {"name": "Can change author", "content_type": 9, "codename": "change_author"}}, {"model": "auth.permission", "pk": 27, "fields": {"name": "Can delete author", "content_type": 9, "codename": "delete_author"}}, {"model": "auth.permission", "pk": 28, "fields": {"name": "Can add book", "content_type": 10, "codename": "add_book"}}, {"model": "auth.permission", "pk": 29, "fields": {"name": "Can change book", "content_type": 10, "codename": "change_book"}}, {"model": "auth.permission", "pk": 30, "fields": {"name": "Can delete book", "content_type": 10, "codename": "delete_book"}}, {"model": "auth.permission", "pk": 31, "fields": {"name": "Can add publisher", "content_type": 11, "codename": "add_publisher"}}, {"model": "auth.permission", "pk": 32, "fields": {"name": "Can change publisher", "content_type": 11, "codename": "change_publisher"}}, {"model": "auth.permission", "pk": 33, "fields": {"name": "Can delete publisher", "content_type": 11, "codename": "delete_publisher"}}, {"model": "auth.permission", "pk": 34, "fields": {"name": "Can add reading list", "content_type": 12, "codename": "add_readinglist"}}, {"model": "auth.permission", "pk": 35, "fields": {"name": "Can change reading list", "content_type": 12, "codename": "change_readinglist"}}, {"model": "auth.permission", "pk": 36, "fields": {"name": "Can delete reading list", "content_type": 12, "codename": "delete_readinglist"}}, {"model": "auth.permission", "pk": 37, "fields": {"name": "Can add favourite", "content_type": 13, "codename": "add_favourite"}}, {"model": "auth.permission", "pk": 38, "fields": {"name": "Can change favourite", "content_type": 13, "codename": "change_favourite"}}, {"model": "auth.permission", "pk": 39, "fields": {"name": "Can delete favourite", "content_type": 13, "codename": "delete_favourite"}}, {"model": "books.readinglist", "pk": 1, "fields": {"book": 2, "started_reading": true, "started_date": "2018-03-05", "finished_reading": false, "finished_date": null, "user": 1}}, {"model": "books.readinglist", "pk": 3, "fields": {"book": 1, "started_reading": true, "started_date": "2018-03-05", "finished_reading": true, "finished_date": "2018-03-05", "user": 1}}, {"model": "admin.logentry", "pk": 1, "fields": {"action_time": "2018-03-05T21:14:11.863Z", "user": 1, "content_type": 9, "object_id": "1", "object_repr": "George Orwell", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 2, "fields": {"action_time": "2018-03-05T21:14:53.482Z", "user": 1, "content_type": 11, "object_id": "1", "object_repr": "Houghton Mifflin Harcourt", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 3, "fields": {"action_time": "2018-03-05T21:15:27.101Z", "user": 1, "content_type": 10, "object_id": "1", "object_repr": "1984", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 4, "fields": {"action_time": "2018-03-05T21:26:31.481Z", "user": 1, "content_type": 9, "object_id": "2", "object_repr": "Jane Austen", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 5, "fields": {"action_time": "2018-03-05T21:26:54.783Z", "user": 1, "content_type": 11, "object_id": "2", "object_repr": "RD Bentley", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 6, "fields": {"action_time": "2018-03-05T21:27:10.824Z", "user": 1, "content_type": 10, "object_id": "2", "object_repr": "Pride and Prejudice", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 7, "fields": {"action_time": "2018-03-05T21:28:16.394Z", "user": 1, "content_type": 10, "object_id": "1", "object_repr": "1984", "action_flag": 2, "change_message": "[{\"changed\": {\"fields\": [\"pages\"]}}]"}}, {"model": "admin.logentry", "pk": 8, "fields": {"action_time": "2018-03-05T21:29:48.448Z", "user": 1, "content_type": 12, "object_id": "1", "object_repr": "Pride and Prejudice", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 9, "fields": {"action_time": "2018-03-05T21:30:01.205Z", "user": 1, "content_type": 12, "object_id": "2", "object_repr": "1984", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 10, "fields": {"action_time": "2018-03-05T21:30:11.957Z", "user": 1, "content_type": 12, "object_id": "2", "object_repr": "1984", "action_flag": 3, "change_message": ""}}, {"model": "admin.logentry", "pk": 11, "fields": {"action_time": "2018-03-05T21:30:19.408Z", "user": 1, "content_type": 12, "object_id": "3", "object_repr": "1984", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 12, "fields": {"action_time": "2018-03-05T21:57:10.690Z", "user": 1, "content_type": 12, "object_id": "3", "object_repr": "1984", "action_flag": 2, "change_message": "[]"}}, {"model": "admin.logentry", "pk": 13, "fields": {"action_time": "2018-03-05T21:58:54.315Z", "user": 1, "content_type": 12, "object_id": "3", "object_repr": "1984", "action_flag": 2, "change_message": "[]"}}, {"model": "admin.logentry", "pk": 14, "fields": {"action_time": "2018-03-05T21:59:04.523Z", "user": 1, "content_type": 12, "object_id": "1", "object_repr": "Pride and Prejudice", "action_flag": 2, "change_message": "[{\"changed\": {\"fields\": [\"started_reading\"]}}]"}}, {"model": "admin.logentry", "pk": 15, "fields": {"action_time": "2018-03-07T22:08:31.514Z", "user": 1, "content_type": 9, "object_id": "3", "object_repr": "Harper Lee", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 16, "fields": {"action_time": "2018-03-07T22:08:53.031Z", "user": 1, "content_type": 11, "object_id": "3", "object_repr": "Best Selling Books", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 17, "fields": {"action_time": "2018-03-07T22:11:41.597Z", "user": 1, "content_type": 10, "object_id": "4", "object_repr": "To Kill a Mockingbird", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 18, "fields": {"action_time": "2018-03-07T22:13:30.817Z", "user": 1, "content_type": 10, "object_id": "4", "object_repr": "To Kill a Mockingbird", "action_flag": 2, "change_message": "[{\"changed\": {\"fields\": [\"published_date\"]}}]"}}, {"model": "admin.logentry", "pk": 19, "fields": {"action_time": "2018-03-07T22:16:36.392Z", "user": 1, "content_type": 9, "object_id": "4", "object_repr": "Jules Verne", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 20, "fields": {"action_time": "2018-03-07T22:19:18.790Z", "user": 1, "content_type": 11, "object_id": "4", "object_repr": "Wordsworth Editions", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 21, "fields": {"action_time": "2018-03-07T22:19:50.344Z", "user": 1, "content_type": 10, "object_id": "5", "object_repr": "Twenty Thousand Leagues Under the Sea", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 22, "fields": {"action_time": "2018-03-07T22:21:51.412Z", "user": 1, "content_type": 11, "object_id": "5", "object_repr": "Pan", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 23, "fields": {"action_time": "2018-03-07T22:25:13.310Z", "user": 1, "content_type": 10, "object_id": "6", "object_repr": "The Hitchhiker's Guide to the Galaxy", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 24, "fields": {"action_time": "2018-03-07T22:36:57.867Z", "user": 1, "content_type": 9, "object_id": "5", "object_repr": "Douglas Adams", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 25, "fields": {"action_time": "2018-03-07T22:37:15.558Z", "user": 1, "content_type": 9, "object_id": "6", "object_repr": "Eoin Colfer", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 26, "fields": {"action_time": "2018-03-07T22:37:21.479Z", "user": 1, "content_type": 10, "object_id": "6", "object_repr": "The Hitchhiker's Guide to the Galaxy", "action_flag": 2, "change_message": "[{\"changed\": {\"fields\": [\"authors\"]}}]"}}, {"model": "admin.logentry", "pk": 27, "fields": {"action_time": "2018-03-07T22:37:30.562Z", "user": 1, "content_type": 10, "object_id": "6", "object_repr": "The Hitchhiker's Guide to the Galaxy", "action_flag": 2, "change_message": "[]"}}]
+[
+{
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields":
+    {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields":
+    {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields":
+    {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields":
+    {
+        "app_label": "auth",
+        "model": "user"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields":
+    {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields":
+    {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields":
+    {
+        "app_label": "django_celery_results",
+        "model": "taskresult"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields":
+    {
+        "app_label": "authtoken",
+        "model": "token"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields":
+    {
+        "app_label": "books",
+        "model": "author"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields":
+    {
+        "app_label": "books",
+        "model": "book"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields":
+    {
+        "app_label": "books",
+        "model": "publisher"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields":
+    {
+        "app_label": "books",
+        "model": "readinglist"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 13,
+    "fields":
+    {
+        "app_label": "books",
+        "model": "favourite"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "f55yc7mbvoosxc0oxo1rg0ia3ml277y8",
+    "fields":
+    {
+        "session_data": "NGE3NmI1ZGRiODE5MzQwODE2MGQ5NjUyNDhiYmE0ZWEwMDk4NWNjZDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5ZTA1ZGJiOTQ4YjJiZmM5ZjgwNGU5N2M4YjY5Y2VjOGU0NGU3NzdmIn0=",
+        "expire_date": "2018-03-19T21:09:51.971Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "gq49l9cx6rt77wtme8m6wc9o0xbq7pyb",
+    "fields":
+    {
+        "session_data": "NGE3NmI1ZGRiODE5MzQwODE2MGQ5NjUyNDhiYmE0ZWEwMDk4NWNjZDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5ZTA1ZGJiOTQ4YjJiZmM5ZjgwNGU5N2M4YjY5Y2VjOGU0NGU3NzdmIn0=",
+        "expire_date": "2018-03-21T21:52:06.651Z"
+    }
+},
+{
+    "model": "books.author",
+    "pk": 1,
+    "fields":
+    {
+        "name": "George Orwell",
+        "description": ""
+    }
+},
+{
+    "model": "books.author",
+    "pk": 2,
+    "fields":
+    {
+        "name": "Jane Austen",
+        "description": ""
+    }
+},
+{
+    "model": "books.author",
+    "pk": 3,
+    "fields":
+    {
+        "name": "Harper Lee",
+        "description": ""
+    }
+},
+{
+    "model": "books.author",
+    "pk": 4,
+    "fields":
+    {
+        "name": "Jules Verne",
+        "description": ""
+    }
+},
+{
+    "model": "books.author",
+    "pk": 5,
+    "fields":
+    {
+        "name": "Douglas Adams",
+        "description": ""
+    }
+},
+{
+    "model": "books.author",
+    "pk": 6,
+    "fields":
+    {
+        "name": "Eoin Colfer",
+        "description": ""
+    }
+},
+{
+    "model": "books.publisher",
+    "pk": 1,
+    "fields":
+    {
+        "name": "Houghton Mifflin Harcourt",
+        "description": ""
+    }
+},
+{
+    "model": "books.publisher",
+    "pk": 2,
+    "fields":
+    {
+        "name": "RD Bentley",
+        "description": ""
+    }
+},
+{
+    "model": "books.publisher",
+    "pk": 3,
+    "fields":
+    {
+        "name": "Best Selling Books",
+        "description": ""
+    }
+},
+{
+    "model": "books.publisher",
+    "pk": 4,
+    "fields":
+    {
+        "name": "Wordsworth Editions",
+        "description": ""
+    }
+},
+{
+    "model": "books.publisher",
+    "pk": 5,
+    "fields":
+    {
+        "name": "Pan",
+        "description": ""
+    }
+},
+{
+    "model": "books.book",
+    "pk": 1,
+    "fields":
+    {
+        "title": "1984",
+        "genre": "fiction",
+        "description": "In 1984, London is a grim city where Big Brother is always watching you, and Thought Police can practically read your mind. Winston is a man in grave danger for the simple reason that his memory still functions. Drawn into a forbidden love affair, Winston finds the courage to join a secret revolutionary organization called The Brotherhood, dedicated to the destruction of the Party. Together, with his beloved Julia, he hazards life in a deadly match against the powers that be.",
+        "pages": 252,
+        "publisher": 1,
+        "published_date": "2017-01-30",
+        "authors": [1]
+    }
+},
+{
+    "model": "books.book",
+    "pk": 2,
+    "fields":
+    {
+        "title": "Pride and Prejudice",
+        "genre": "fiction",
+        "description": "",
+        "pages": 340,
+        "publisher": 2,
+        "published_date": "1853-01-01",
+        "authors": [2]
+    }
+},
+{
+    "model": "books.book",
+    "pk": 4,
+    "fields":
+    {
+        "title": "To Kill a Mockingbird",
+        "genre": "fiction",
+        "description": "To Kill a Mockingbird follows the maturing of Scout in the 1930s as her father defends a wrongly charged man with rape and the exploration of the mysterious neighbor Boo Radley. This story has the realistic and sad elements of racial tension during the time and how non-accepting people were during the time. From the beginning to end it becomes apparent how much Scout matures, but also how her brother Jem does as well. The themes of friendship, acceptance, racial tension, justice, growing up, and taking a stand are what helps to make this story powerful.",
+        "pages": 281,
+        "publisher": 3,
+        "published_date": null,
+        "authors": [3]
+    }
+},
+{
+    "model": "books.book",
+    "pk": 5,
+    "fields":
+    {
+        "title": "Twenty Thousand Leagues Under the Sea",
+        "genre": "adventure",
+        "description": "An American frigate, tracking down a ship-sinking monster, faces not a living creature but an incredible invention -- a fantastic submarine commanded by the mysterious Captain Nemo. Suddenly a devastating explosion leaves just three survivors who find themselves prisoners in Nemo's death ship on an underwater odyssey around the world, as Captain Nemo -- one of the most horrible villains ever created -- takes his revenge out on society. This novel, written in 1870, foretells with uncanny accuracy the inventions and advanced technology of the 20th century, and has become a literary stepping-stone for generations of science-fiction writers.",
+        "pages": 245,
+        "publisher": 4,
+        "published_date": "1870-06-20",
+        "authors": [4]
+    }
+},
+{
+    "model": "books.book",
+    "pk": 6,
+    "fields":
+    {
+        "title": "The Hitchhiker's Guide to the Galaxy",
+        "genre": "science-fiction",
+        "description": "Thirty years of celebrating the comic genius of Douglas Adams... On 12 October 1979, the most remarkable book ever to come out of the great publishing corporations of Ursa Minor (and Earth) was made available to humanity - The Hitchhiker's Guide to the Galaxy. It's an ordinary Thursday lunchtime for Arthur Dent until his house gets demolished. The Earth follows shortly afterwards to make way for a new hyperspace bypass and his best friend has just announced that he's an alien. At this moment, they're hurtling through space with nothing but their towels and an innocuous-looking book inscribed with the big, friendly words: DON'T PANIC. The weekend has only just begun... Volume one in the trilogy of five.",
+        "pages": 180,
+        "publisher": 5,
+        "published_date": "1995-11-20",
+        "authors": [5, 6]
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 1,
+    "fields":
+    {
+        "name": "Can add log entry",
+        "content_type": 1,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields":
+    {
+        "name": "Can change log entry",
+        "content_type": 1,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields":
+    {
+        "name": "Can delete log entry",
+        "content_type": 1,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 4,
+    "fields":
+    {
+        "name": "Can add permission",
+        "content_type": 2,
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 5,
+    "fields":
+    {
+        "name": "Can change permission",
+        "content_type": 2,
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 6,
+    "fields":
+    {
+        "name": "Can delete permission",
+        "content_type": 2,
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 7,
+    "fields":
+    {
+        "name": "Can add group",
+        "content_type": 3,
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 8,
+    "fields":
+    {
+        "name": "Can change group",
+        "content_type": 3,
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 9,
+    "fields":
+    {
+        "name": "Can delete group",
+        "content_type": 3,
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 10,
+    "fields":
+    {
+        "name": "Can add user",
+        "content_type": 4,
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 11,
+    "fields":
+    {
+        "name": "Can change user",
+        "content_type": 4,
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 12,
+    "fields":
+    {
+        "name": "Can delete user",
+        "content_type": 4,
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields":
+    {
+        "name": "Can add content type",
+        "content_type": 5,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields":
+    {
+        "name": "Can change content type",
+        "content_type": 5,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields":
+    {
+        "name": "Can delete content type",
+        "content_type": 5,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields":
+    {
+        "name": "Can add session",
+        "content_type": 6,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields":
+    {
+        "name": "Can change session",
+        "content_type": 6,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields":
+    {
+        "name": "Can delete session",
+        "content_type": 6,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
+    "fields":
+    {
+        "name": "Can add task result",
+        "content_type": 7,
+        "codename": "add_taskresult"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 20,
+    "fields":
+    {
+        "name": "Can change task result",
+        "content_type": 7,
+        "codename": "change_taskresult"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 21,
+    "fields":
+    {
+        "name": "Can delete task result",
+        "content_type": 7,
+        "codename": "delete_taskresult"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields":
+    {
+        "name": "Can add Token",
+        "content_type": 8,
+        "codename": "add_token"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields":
+    {
+        "name": "Can change Token",
+        "content_type": 8,
+        "codename": "change_token"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields":
+    {
+        "name": "Can delete Token",
+        "content_type": 8,
+        "codename": "delete_token"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields":
+    {
+        "name": "Can add author",
+        "content_type": 9,
+        "codename": "add_author"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields":
+    {
+        "name": "Can change author",
+        "content_type": 9,
+        "codename": "change_author"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields":
+    {
+        "name": "Can delete author",
+        "content_type": 9,
+        "codename": "delete_author"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields":
+    {
+        "name": "Can add book",
+        "content_type": 10,
+        "codename": "add_book"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 29,
+    "fields":
+    {
+        "name": "Can change book",
+        "content_type": 10,
+        "codename": "change_book"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 30,
+    "fields":
+    {
+        "name": "Can delete book",
+        "content_type": 10,
+        "codename": "delete_book"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 31,
+    "fields":
+    {
+        "name": "Can add publisher",
+        "content_type": 11,
+        "codename": "add_publisher"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 32,
+    "fields":
+    {
+        "name": "Can change publisher",
+        "content_type": 11,
+        "codename": "change_publisher"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 33,
+    "fields":
+    {
+        "name": "Can delete publisher",
+        "content_type": 11,
+        "codename": "delete_publisher"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 34,
+    "fields":
+    {
+        "name": "Can add reading list",
+        "content_type": 12,
+        "codename": "add_readinglist"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 35,
+    "fields":
+    {
+        "name": "Can change reading list",
+        "content_type": 12,
+        "codename": "change_readinglist"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 36,
+    "fields":
+    {
+        "name": "Can delete reading list",
+        "content_type": 12,
+        "codename": "delete_readinglist"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 37,
+    "fields":
+    {
+        "name": "Can add favourite",
+        "content_type": 13,
+        "codename": "add_favourite"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 38,
+    "fields":
+    {
+        "name": "Can change favourite",
+        "content_type": 13,
+        "codename": "change_favourite"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 39,
+    "fields":
+    {
+        "name": "Can delete favourite",
+        "content_type": 13,
+        "codename": "delete_favourite"
+    }
+},
+{
+    "model": "books.readinglist",
+    "pk": 1,
+    "fields":
+    {
+        "book": 2,
+        "started_reading": true,
+        "started_date": "2018-03-05",
+        "finished_reading": false,
+        "finished_date": null,
+        "user": 1
+    }
+},
+{
+    "model": "books.readinglist",
+    "pk": 3,
+    "fields":
+    {
+        "book": 1,
+        "started_reading": true,
+        "started_date": "2018-03-05",
+        "finished_reading": true,
+        "finished_date": "2018-03-05",
+        "user": 1
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields":
+    {
+        "action_time": "2018-03-05T21:14:11.863Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "1",
+        "object_repr": "George Orwell",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields":
+    {
+        "action_time": "2018-03-05T21:14:53.482Z",
+        "user": 1,
+        "content_type": 11,
+        "object_id": "1",
+        "object_repr": "Houghton Mifflin Harcourt",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields":
+    {
+        "action_time": "2018-03-05T21:15:27.101Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "1",
+        "object_repr": "1984",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields":
+    {
+        "action_time": "2018-03-05T21:26:31.481Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "2",
+        "object_repr": "Jane Austen",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields":
+    {
+        "action_time": "2018-03-05T21:26:54.783Z",
+        "user": 1,
+        "content_type": 11,
+        "object_id": "2",
+        "object_repr": "RD Bentley",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields":
+    {
+        "action_time": "2018-03-05T21:27:10.824Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "2",
+        "object_repr": "Pride and Prejudice",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields":
+    {
+        "action_time": "2018-03-05T21:28:16.394Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "1",
+        "object_repr": "1984",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"pages\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields":
+    {
+        "action_time": "2018-03-05T21:29:48.448Z",
+        "user": 1,
+        "content_type": 12,
+        "object_id": "1",
+        "object_repr": "Pride and Prejudice",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields":
+    {
+        "action_time": "2018-03-05T21:30:01.205Z",
+        "user": 1,
+        "content_type": 12,
+        "object_id": "2",
+        "object_repr": "1984",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields":
+    {
+        "action_time": "2018-03-05T21:30:11.957Z",
+        "user": 1,
+        "content_type": 12,
+        "object_id": "2",
+        "object_repr": "1984",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields":
+    {
+        "action_time": "2018-03-05T21:30:19.408Z",
+        "user": 1,
+        "content_type": 12,
+        "object_id": "3",
+        "object_repr": "1984",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields":
+    {
+        "action_time": "2018-03-05T21:57:10.690Z",
+        "user": 1,
+        "content_type": 12,
+        "object_id": "3",
+        "object_repr": "1984",
+        "action_flag": 2,
+        "change_message": "[]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields":
+    {
+        "action_time": "2018-03-05T21:58:54.315Z",
+        "user": 1,
+        "content_type": 12,
+        "object_id": "3",
+        "object_repr": "1984",
+        "action_flag": 2,
+        "change_message": "[]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields":
+    {
+        "action_time": "2018-03-05T21:59:04.523Z",
+        "user": 1,
+        "content_type": 12,
+        "object_id": "1",
+        "object_repr": "Pride and Prejudice",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"started_reading\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields":
+    {
+        "action_time": "2018-03-07T22:08:31.514Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "3",
+        "object_repr": "Harper Lee",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields":
+    {
+        "action_time": "2018-03-07T22:08:53.031Z",
+        "user": 1,
+        "content_type": 11,
+        "object_id": "3",
+        "object_repr": "Best Selling Books",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 17,
+    "fields":
+    {
+        "action_time": "2018-03-07T22:11:41.597Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "4",
+        "object_repr": "To Kill a Mockingbird",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 18,
+    "fields":
+    {
+        "action_time": "2018-03-07T22:13:30.817Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "4",
+        "object_repr": "To Kill a Mockingbird",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"published_date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 19,
+    "fields":
+    {
+        "action_time": "2018-03-07T22:16:36.392Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "4",
+        "object_repr": "Jules Verne",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 20,
+    "fields":
+    {
+        "action_time": "2018-03-07T22:19:18.790Z",
+        "user": 1,
+        "content_type": 11,
+        "object_id": "4",
+        "object_repr": "Wordsworth Editions",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 21,
+    "fields":
+    {
+        "action_time": "2018-03-07T22:19:50.344Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "5",
+        "object_repr": "Twenty Thousand Leagues Under the Sea",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 22,
+    "fields":
+    {
+        "action_time": "2018-03-07T22:21:51.412Z",
+        "user": 1,
+        "content_type": 11,
+        "object_id": "5",
+        "object_repr": "Pan",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 23,
+    "fields":
+    {
+        "action_time": "2018-03-07T22:25:13.310Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "6",
+        "object_repr": "The Hitchhiker's Guide to the Galaxy",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 24,
+    "fields":
+    {
+        "action_time": "2018-03-07T22:36:57.867Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "5",
+        "object_repr": "Douglas Adams",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 25,
+    "fields":
+    {
+        "action_time": "2018-03-07T22:37:15.558Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "6",
+        "object_repr": "Eoin Colfer",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 26,
+    "fields":
+    {
+        "action_time": "2018-03-07T22:37:21.479Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "6",
+        "object_repr": "The Hitchhiker's Guide to the Galaxy",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"authors\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 27,
+    "fields":
+    {
+        "action_time": "2018-03-07T22:37:30.562Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "6",
+        "object_repr": "The Hitchhiker's Guide to the Galaxy",
+        "action_flag": 2,
+        "change_message": "[]"
+    }
+}]

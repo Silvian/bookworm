@@ -1,5 +1,7 @@
 """Profile signals."""
 
+import logging
+
 from django.conf import settings
 from django.db.models.signals import (pre_save, post_save)
 from django.dispatch import receiver
@@ -9,6 +11,9 @@ from meta_info.models import (Tag, MetaInfo)
 from authentication.models import (Profile, ContactMethod)
 
 from rest_framework.authtoken.models import Token
+
+
+logger = logging.getLogger(__name__)
 
 
 @receiver(pre_save, sender=ContactMethod)
@@ -21,6 +26,7 @@ def pre_save_contact_method(sender, instance, *args, **kwargs):
 @receiver(post_save, sender=ContactMethod)
 def post_save_contact_method(sender, instance, *args, **kwargs):
     """Set b y default the primary tag for ContactMethod."""
+    primary_copy = 'primary'
     require_primary = [
         ContactMethod.TYPES.email,
         ContactMethod.TYPES.mobile
@@ -28,10 +34,12 @@ def post_save_contact_method(sender, instance, *args, **kwargs):
     if instance.type in require_primary:
         contacts = ContactMethod.objects.filter(
             profile=instance.profile,
-            type=instance.type,
-            tags__slug=ContactMethod.TAGS.primary,
+            tags__slug=primary_copy,
         ).count()
-        tag = Tag.objects.get(slug=ContactMethod.TAGS.primary)
+        try:
+            tag = Tag.objects.get(slug=primary_copy)
+        except Exception:
+            tag = Tag.objects.create(copy=primary_copy)
         if not contacts:
             instance.tags.add(tag)
 
@@ -41,10 +49,17 @@ def create_user_profile(sender, instance, created, **kwargs):
     """Create profile when an user instance is created."""
     if not created:
         return
-    meta_info = MetaInfo()
-    Profile.objects.create(
+    meta_info = MetaInfo.objects.create()
+    profile = Profile.objects.create(
         user=instance,
+        email=instance.email,
         meta_info=meta_info,
+    )
+    ContactMethod.objects.create(
+        type=ContactMethod.TYPES.email,
+        detail=instance.email,
+        email=instance.email,
+        profile=profile,
     )
 
 

@@ -5,6 +5,11 @@ from .models import (
     Tag,
     MetaInfo,
 )
+from meta_info.models_localisation import (
+    LanguageTag,
+    LocationTag,
+    LocaliseTag,
+)
 
 
 @admin.register(Tag)
@@ -29,3 +34,47 @@ class ProfileAdmin(admin.ModelAdmin):
         'json',
     )
     search_fields = ('copy',)
+
+
+@admin.register(LanguageTag)
+class LanguageTagAdmin(admin.ModelAdmin):
+    """LanguageTag admin."""
+
+    list_display = TagAdmin.list_display + (
+        'name_iso',
+        'iso_639_3',
+    )
+    search_fields = TagAdmin.search_fields + (
+        'name_iso',
+        'name_native',
+        'iso_639_1',
+        'iso_639_2_t',
+        'iso_639_2_b',
+        'iso_639_3',
+    )
+
+
+@admin.register(LocationTag)
+class LocationTagAdmin(admin.ModelAdmin):
+    """LocationTag admin."""
+
+    list_display = TagAdmin.list_display + (
+        'iso_alpha_2',
+        'iso_alpha_3',
+    )
+    search_fields = TagAdmin.search_fields + (
+        'iso_alpha_2',
+        'iso_alpha_3',
+    )
+
+
+@admin.register(LocaliseTag)
+class LocaliseTagAdmin(admin.ModelAdmin):
+    """LocaliseTag admin."""
+
+    list_display = (
+        'id',
+        'language',
+        'location',
+    )
+    search_fields = ('language',)

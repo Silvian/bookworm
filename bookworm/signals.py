@@ -7,9 +7,6 @@ from django.utils.timezone import now
 from bookworm.mixins import PreserveModelMixin
 
 
-# weak=False # on connect()
-
-
 @receiver(pre_delete, sender=PreserveModelMixin)
 def pre_delete_preserve_model(sender, instance, *args, **kwargs):
     """Assign the deletion values to the instance."""

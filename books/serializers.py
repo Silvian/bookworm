@@ -3,8 +3,8 @@
 from rest_framework import serializers
 
 from meta_info.serializers import MetaSerializer
-from authentication.serializers import ProfileSerializer
 
+from books.exceptions import OperationReservedInternally
 from books.models import (
     Book,
     BookProgress,
@@ -12,7 +12,21 @@ from books.models import (
 )
 
 
-class BookSerializer(MetaSerializer):
+class ProfileAssociationSerializerMixin:
+    """Manage the creation of an object with reference to a Profile."""
+
+    def validate(self, data):
+        """Validate for profile assignment to validated_data"""
+        current_user = self.context['request'].user
+        if 'profile' not in data:
+            data['profile'] = current_user.profile
+        elif current_user.id != data['profile']:
+            if not current_user.is_superuser and not current_user.is_staff:
+                raise OperationReservedInternally(current_user)
+        return super().validate(data)
+
+
+class BookSerializer(MetaSerializer, ProfileAssociationSerializerMixin):
     class Meta:
         model = Book
         read_only_fields = (
@@ -30,9 +44,9 @@ class BookSerializer(MetaSerializer):
         exclude = []
 
 
-class BookProgressSerializer(serializers.ModelSerializer):
+class BookProgressSerializer(
+        serializers.ModelSerializer, ProfileAssociationSerializerMixin):
     book = BookSerializer()
-    profile = ProfileSerializer()
 
     class Meta:
         model = BookProgress
@@ -48,14 +62,12 @@ class BookProgressSerializer(serializers.ModelSerializer):
             'page',
             'progress',
             'book',
-            'profile',
         )
 
 
-class BookReviewSerializer(MetaSerializer):
+class BookReviewSerializer(MetaSerializer, ProfileAssociationSerializerMixin):
     book = BookSerializer()
     progress = BookProgressSerializer()
-    profile = ProfileSerializer()
 
     class Meta:
         model = BookReview
@@ -68,6 +80,5 @@ class BookReviewSerializer(MetaSerializer):
         fields = read_only_fields + (
             'book',
             'progress',
-            'profile',
         )
         exclude = []

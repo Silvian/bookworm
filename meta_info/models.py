@@ -6,14 +6,11 @@ from django.utils.translation import ugettext_lazy as _
 
 from hashid_field import HashidAutoField
 
-from bookworm.mixins import ModifiedModelMixin
+from bookworm.mixins import PreserveModelMixin
 
 
-class Tag(models.Model):
-    """Tag model.
-
-    Consider an extension of tags to allow tagging with all media types.
-    """
+class TagMixin(models.Model):
+    """Tagging base mixin."""
 
     id = HashidAutoField(primary_key=True)
     slug = models.SlugField(
@@ -21,26 +18,31 @@ class Tag(models.Model):
         unique=True,
         blank=True,
     )
-    slug_u = models.SlugField(
-        blank=True,
-    )
     copy = models.CharField(
         max_length=200,
         db_index=True,
     )
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-    )
     tags = models.ManyToManyField(
         'Tag',
-        related_name="tag_tags+",
+        related_name='tag_tags+',
         verbose_name=_('Tags'),
         blank=True,
     )
 
     class Meta:
+        abstract = True
+
+
+class Tag(TagMixin, PreserveModelMixin):
+    """Tag model."""
+
+    class Meta:
         verbose_name = 'Tag'
         verbose_name_plural = 'Tags'
+
+    def __str__(self):
+        """Display only as URI valid slug."""
+        return self.slug
 
 
 class MetaInfoMixin(models.Model):
@@ -50,15 +52,15 @@ class MetaInfoMixin(models.Model):
     copy = models.TextField(
         db_index=True,
         blank=True,
-        null=True,
     )
     json = JSONField(
         default={},
         blank=True,
+        null=True,
     )
     tags = models.ManyToManyField(
         Tag,
-        related_name="tags+",
+        related_name='tags+',
         verbose_name=_('Tags'),
         blank=True,
     )
@@ -67,43 +69,34 @@ class MetaInfoMixin(models.Model):
         abstract = True
 
 
-class MetaInfo(MetaInfoMixin, ModifiedModelMixin):
+class MetaInfo(MetaInfoMixin, PreserveModelMixin):
     """Meta model."""
+
+    uri = models.URLField(
+        max_length=2000,
+        blank=True,
+        null=True,
+    )
+    chain = models.ManyToManyField(
+        'MetaInfo',
+        verbose_name=_('Meta Data Chain'),
+        blank=True,
+    )
 
     class Meta:
         verbose_name = 'Meta'
         verbose_name_plural = 'Metas'
 
-
-# meta_information_example = {
-#     'genre': [],
-#     'author': '',
-#     'collaborators': [],
-#     'publisher': '',
-#     'distributor': '',
-#     'published_date': '',
-#     'publication_issue': '',
-#     'isbn': '',
-#     'barcode': '',
-#     'pages': '',
-#     'reviews': [],
-# }
-# GENRES = Choices(
-#     ('action', _('Action')),
-#     ('adventure', _('Adventure')),
-#     ('romance', _('Romance')),
-#     ('fiction', _('Fiction')),
-#     ('fantasy', _('Fantasy')),
-#     ('non-fiction', _('Non Fiction')),
-#     ('science-fiction', _('Science Fiction')),
-#     ('satire', _('Satire')),
-#     ('drama', _('Drama')),
-#     ('mystery', _('Mystery')),
-#     ('poetry', _('Poetry')),
-#     ('comics', _('Comics')),
-#     ('horror', _('Horror')),
-#     ('art', _('Art')),
-#     ('diaries', _('Diaries')),
-#     ('guide', _('Guide')),
-#     ('travel', _('Travel')),
-# )
+    def __str__(self):
+        """Represent MetaInfo in brevity from complex store."""
+        description = self.copy
+        if not self.copy:
+            if self.uri:
+                description = self.uri
+            else:
+                description = 'meta empty'
+        return '{} "{}" tags:{}'.format(
+            self.id,
+            description[:20],
+            self.tags.count()
+        )
