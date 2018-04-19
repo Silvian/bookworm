@@ -19,12 +19,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """load models and check for tags to be created."""
         for language in LANGUAGES:
-            if LanguageTag.objects.filter(name_iso=language[1]).count() > 0:
+            if LanguageTag.objects.filter(copy=language[1]).count() > 0:
                 continue
-            logger.error('{}'.format(language))
             LanguageTag.objects.create(
-                copy=language[0],
-                name_iso=language[1],
+                copy=language[1],
+                family=language[0],
                 name_native=language[2],
                 iso_639_1=language[3],
                 iso_639_2_t=language[4],

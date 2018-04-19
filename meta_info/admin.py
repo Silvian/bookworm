@@ -41,11 +41,9 @@ class LanguageTagAdmin(admin.ModelAdmin):
     """LanguageTag admin."""
 
     list_display = TagAdmin.list_display + (
-        'name_iso',
         'iso_639_3',
     )
     search_fields = TagAdmin.search_fields + (
-        'name_iso',
         'name_native',
         'iso_639_1',
         'iso_639_2_t',

@@ -135,7 +135,7 @@ class Profile(PreserveModelMixin):
     @property
     def display_name(self):
         """Generate the profiles display name when none is provided."""
-        name_list = ['name_title', 'name_first', 'name_family']
+        name_list = ['name_first', 'name_family']
         return self.name_display or \
             ' '.join([getattr(self, n) for n in name_list if getattr(self, n)])
 

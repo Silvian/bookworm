@@ -83,6 +83,14 @@ class Book(PublicationMixin, MetaInfoMixin, PreserveModelMixin):
         verbose_name = 'Book'
         verbose_name_plural = 'Books'
 
+    @property
+    def author(self):
+        return self.tags.filter(tags__slug__iexact='author')[0]
+
+    def __str__(self):
+        """Title and author of book."""
+        return '{} by {}'.format(self.title, self.author.copy)
+
 
 class BookProgress(ProfileReferredMixin, PreserveModelMixin):
     """Book progress model."""
@@ -101,13 +109,17 @@ class BookProgress(ProfileReferredMixin, PreserveModelMixin):
     book = models.ForeignKey(
         Book,
         related_name='progress+',
-        verbose_name=_('Book progress'),
+        verbose_name=_('Book'),
         on_delete=models.DO_NOTHING,
     )
 
     class Meta:
         verbose_name = 'Book progress'
         verbose_name_plural = 'Books\' progress'
+
+    def __str__(self):
+        """Title and percent of book progress."""
+        return '{} at {}%'.format(self.book.title, self.percent)
 
 
 class PublicationFile(MetaInfoMixin, PreserveModelMixin):
@@ -117,7 +129,7 @@ class PublicationFile(MetaInfoMixin, PreserveModelMixin):
     book = models.ForeignKey(
         Book,
         related_name='files',
-        verbose_name=_('Books\' files'),
+        verbose_name=_('Book'),
         on_delete=models.DO_NOTHING,
     )
     extension = models.CharField(
@@ -131,7 +143,7 @@ class PublicationFile(MetaInfoMixin, PreserveModelMixin):
     progress = models.ForeignKey(
         BookProgress,
         related_name='file_progress+',
-        verbose_name=_('Files\' progress'),
+        verbose_name=_('Progress'),
         on_delete=models.DO_NOTHING,
         blank=True,
         null=True,
@@ -152,14 +164,14 @@ class BookChapter(MetaInfoMixin, PreserveModelMixin):
     progress = models.ForeignKey(
         BookProgress,
         related_name='chapter_progress+',
-        verbose_name=_('Chapter location in book'),
+        verbose_name=_('Progress'),
         on_delete=models.DO_NOTHING,
         blank=True,
     )
     book = models.ForeignKey(
         Book,
         related_name='chapters',
-        verbose_name=_('Book chapters'),
+        verbose_name=_('Book'),
         on_delete=models.DO_NOTHING,
     )
 
@@ -187,13 +199,13 @@ class BookReview(ProfileReferredMixin, MetaInfoMixin, PreserveModelMixin):
     book = models.ForeignKey(
         Book,
         related_name='reviews',
-        verbose_name=_('Book reviews'),
+        verbose_name=_('Book'),
         on_delete=models.PROTECT,
     )
     progress = models.ForeignKey(
         BookProgress,
         related_name='reviewed_at',
-        verbose_name=_('Book review Progress'),
+        verbose_name=_('Progress'),
         on_delete=models.DO_NOTHING,
         blank=True,
     )

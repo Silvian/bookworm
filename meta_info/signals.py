@@ -28,7 +28,7 @@ def pre_save_language_tag(sender, instance, *args, **kwargs):
     """Set the slug of the provided tag if none is set."""
     if instance.slug:
         return
-    instance.slug = slugify(' '.join([instance.copy, instance.name_iso]))
-    if len(instance.slug) > 40:
-        instance.slug = '{}-{}'.format(instance.slug[:40], instance.id[:10])
+    instance.slug = slugify(' '.join([instance.copy, instance.iso_639_3]))
+    if len(instance.slug) > 50:
+        instance.slug = '{}'.format(instance.slug[:50])
     logger.debug('Tag {}.slug updated'.format(instance.copy))

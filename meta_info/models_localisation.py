@@ -12,13 +12,14 @@ from bookworm.mixins import PreserveModelMixin
 class LanguageTag(TagMixin, PreserveModelMixin):
     """Language object."""
 
-    name_iso = models.TextField(
+    family = models.TextField(
         blank=True,
     )
     name_native = models.TextField(
         blank=True,
     )
-    iso_639_1 = models.TextField(
+    iso_639_1 = models.CharField(
+        max_length=3,
         blank=True,
     )
     iso_639_2_t = models.CharField(
@@ -41,6 +42,10 @@ class LanguageTag(TagMixin, PreserveModelMixin):
     class Meta:
         verbose_name = 'Language Tag'
         verbose_name_plural = 'Language Tags'
+
+    def __str__(self):
+        """Title and percent of book progress."""
+        return '{}'.format(self.copy)
 
 
 class LocationTag(TagMixin, PreserveModelMixin):
@@ -78,6 +83,10 @@ class LocationTag(TagMixin, PreserveModelMixin):
     class Meta:
         verbose_name = 'Location Tag'
         verbose_name_plural = 'Location Tags'
+
+    def __str__(self):
+        """Title and percent of book progress."""
+        return '{}'.format(self.copy)
 
 
 class LocaliseTag(PreserveModelMixin):

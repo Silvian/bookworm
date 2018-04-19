@@ -21,6 +21,7 @@ class BookAdmin(admin.ModelAdmin):
 
     search_fields = (
         'title',
+        'tags__copy',
     )
 
     list_filter = ('title',)
