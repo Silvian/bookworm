@@ -31,15 +31,14 @@ GENRES = (
     'Travel',
 )
 TAGS = (
-    'genre',
-    'author',
-    'publisher',
-    'isbn',
-    'collaborator',
-    'collaborators',
-    'distributor',
-    'published date',
-    'publication issue',
+    'Genre',
+    'Author',
+    'Publisher',
+    'Collaborator',
+    'Collaborators',
+    'Distributor',
+    'Published Date',
+    'Publication Issue',
 ) + GENRES
 
 

@@ -1,9 +1,14 @@
 """Command to create default super user."""
 
+import logging
+
 from django.core.management import BaseCommand
 
 from meta_info.models_localisation import LocationTag
 from meta_info.data.countries import COUNTRIES
+
+
+logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
@@ -22,3 +27,4 @@ class Command(BaseCommand):
                 iso_alpha_3=country[2],
                 iso_numeric=country[3],
             )
+            logger.info('Added Location Tag: {}'.format(country[2]))

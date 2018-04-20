@@ -44,8 +44,8 @@ class LanguageTag(TagMixin, PreserveModelMixin):
         verbose_name_plural = 'Language Tags'
 
     def __str__(self):
-        """Title and percent of book progress."""
-        return '{}'.format(self.copy)
+        """ISO and name of language."""
+        return '{} "{}"'.format(self.iso_639_3, self.copy[:30])
 
 
 class LocationTag(TagMixin, PreserveModelMixin):
@@ -85,8 +85,8 @@ class LocationTag(TagMixin, PreserveModelMixin):
         verbose_name_plural = 'Location Tags'
 
     def __str__(self):
-        """Title and percent of book progress."""
-        return '{}'.format(self.copy)
+        """ISO and name of location."""
+        return '{} "{}"'.format(self.iso_alpha_3, self.copy[:30])
 
 
 class LocaliseTag(PreserveModelMixin):
@@ -107,3 +107,18 @@ class LocaliseTag(PreserveModelMixin):
         blank=True,
         null=True,
     )
+
+    class Meta:
+        verbose_name = 'Localisation Tag'
+        verbose_name_plural = 'Localisation Tags'
+
+    @property
+    def display_code(self):
+        return '{}-{}'.format(
+            self.language.iso_639_3,
+            self.location.iso_alpha_3.lower() if self.location else ''
+        )
+
+    def __str__(self):
+        """ISO codes of language and location."""
+        return self.display_code

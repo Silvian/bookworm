@@ -31,3 +31,4 @@ class Command(BaseCommand):
                 iso_639_3=language[6],
                 notes=language[7],
             )
+            logger.info('Added Language tag: {}'.format(language[6]))
