@@ -25,6 +25,25 @@ class Command(BaseCommand):
 
     help = __doc__
 
+    def _update_tag_dependants(self, tag, dependant_list):
+        if not dependant_list:
+            return
+        slug_list = [slugify(n) for n in dependant_list]
+        if tag.tags.count() is 0:
+            set_tags = list(Tag.objects.filter(slug__in=slug_list, ))
+        else:
+            tags = tag.tags.all()
+            set_tags = list(tags)
+            for slug in slug_list:
+                if tags.filter(slug=slug).first():
+                    continue
+                set_tags.append(Tag.objects.filter(slug=slug).first())
+        tag.tags.set(set_tags)
+        tag.save()
+        logger.info(
+            'Tag {}, dependants set: {}'.format(tag.copy, list(set_tags), )
+        )
+
     def _create_tags(self, tag_list):
         for tag in tag_list:
             dependant_list = ()
@@ -32,22 +51,11 @@ class Command(BaseCommand):
                 dependant_list = tag[1]
                 self._create_tags(dependant_list)
                 tag = tag[0]
-            if Tag.objects.filter(slug=slugify(tag)).count():
+            if Tag.objects.filter(slug=slugify(tag)).first():
                 continue
             created = Tag.objects.create(copy=tag)
             logger.info('Tag created: {}'.format(tag))
-            if dependant_list:
-                dependants = Tag.objects.filter(
-                    slug__in=[slugify(n) for n in dependant_list],
-                )
-                created.tags.set(list(dependants))
-                created.save()
-                logger.info(
-                    'Tag {}, dependants set: {}'.format(
-                        created,
-                        list(dependants),
-                    )
-                )
+            self._update_tag_dependants(created, dependant_list)
 
     def handle(self, *args, **options):
         """load models and check for tags to be created."""

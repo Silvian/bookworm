@@ -16,12 +16,20 @@ from meta_info.models_localisation import (
 class TagAdmin(admin.ModelAdmin):
     """Tag admin."""
 
+    date_hierarchy = 'created_at'
     list_display = (
         'id',
         'slug',
         'copy',
     )
-    search_fields = ('copy',)
+    search_fields = (
+        'copy',
+    )
+    exclude = (
+        'created_at',
+        'modified_at',
+        'deleted_at',
+    )
 
 
 @admin.register(MetaInfo)
@@ -33,7 +41,14 @@ class ProfileAdmin(admin.ModelAdmin):
         'copy',
         'json',
     )
-    search_fields = ('copy',)
+    search_fields = (
+        'copy',
+    )
+    exclude = (
+        'created_at',
+        'modified_at',
+        'deleted_at',
+    )
 
 
 @admin.register(LanguageTag)
@@ -51,6 +66,11 @@ class LanguageTagAdmin(admin.ModelAdmin):
         'iso_639_2_b',
         'iso_639_3',
     )
+    exclude = (
+        'created_at',
+        'modified_at',
+        'deleted_at',
+    )
 
 
 @admin.register(LocationTag)
@@ -65,6 +85,11 @@ class LocationTagAdmin(admin.ModelAdmin):
         'iso_alpha_2',
         'iso_alpha_3',
     )
+    exclude = (
+        'created_at',
+        'modified_at',
+        'deleted_at',
+    )
 
 
 @admin.register(LocaliseTag)
@@ -77,3 +102,8 @@ class LocaliseTagAdmin(admin.ModelAdmin):
         'location',
     )
     search_fields = ('language',)
+    exclude = (
+        'created_at',
+        'modified_at',
+        'deleted_at',
+    )

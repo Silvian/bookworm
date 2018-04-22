@@ -25,7 +25,15 @@ class BookProgressViewSet(viewsets.ModelViewSet):
     queryset = BookProgress.objects.all()
     serializer_class = BookProgressSerializer
 
+    def create(self, request, *args, **kwargs):
+        # Test for REVIEW data available
+        return super().create(request, *args, **kwargs)
+
 
 class BookReviewViewSet(viewsets.ModelViewSet):
     queryset = BookReview.objects.all()
     serializer_class = BookReviewSerializer
+
+    def create(self, request, *args, **kwargs):
+        # Test for progress data available
+        return super().create(request, *args, **kwargs)

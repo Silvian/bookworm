@@ -18,6 +18,11 @@ class ContactMethodAdmin(admin.ModelAdmin):
         'email',
         'uri',
     )
+    exclude = (
+        'created_at',
+        'modified_at',
+        'deleted_at',
+    )
 
 
 @admin.register(Profile)
@@ -31,4 +36,12 @@ class ProfileAdmin(admin.ModelAdmin):
         'name_family',
         'name_display',
         'email',
+    )
+    exclude = (
+        'created_at',
+        'modified_at',
+        'deleted_at',
+    )
+    readonly_fields = (
+        'user',
     )

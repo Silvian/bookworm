@@ -6,29 +6,30 @@ from django.utils.translation import ugettext_lazy as _
 from model_utils import Choices
 from hashid_field import HashidAutoField
 
-from bookworm.mixins import PreserveModelMixin
-from authentication.models import Profile
+from bookworm.mixins import (
+    PublishableModelMixin, ProfileReferredMixin, PreserveModelMixin
+)
 from meta_info.models import MetaInfoMixin
 
 
 GENRES = (
-    'Action',
-    'Adventure',
-    'Romance',
-    'Fiction',
-    'Fantasy',
-    'Non Fiction',
-    'Science Fiction',
-    'Satire',
-    'Drama',
-    'Mystery',
-    'Poetry',
-    'Comics',
-    'Horror',
-    'Art',
-    'Diaries',
-    'Guide',
-    'Travel',
+    ('Action', ('Genre',), ),
+    ('Adventure', ('Genre',), ),
+    ('Romance', ('Genre',), ),
+    ('Fiction', ('Genre',), ),
+    ('Fantasy', ('Genre',), ),
+    ('Non Fiction', ('Genre',), ),
+    ('Science Fiction', ('Genre',), ),
+    ('Satire', ('Genre',), ),
+    ('Drama', ('Genre',), ),
+    ('Mystery', ('Genre',), ),
+    ('Poetry', ('Genre',), ),
+    ('Comics', ('Genre',), ),
+    ('Horror', ('Genre',), ),
+    ('Art', ('Genre',), ),
+    ('Diaries', ('Genre',), ),
+    ('Guide', ('Genre',), ),
+    ('Travel', ('Genre',), ),
 )
 TAGS = (
     'Genre',
@@ -62,21 +63,20 @@ class PublicationMixin(models.Model):
         abstract = True
 
 
-class ProfileReferredMixin(models.Model):
-    """Profile association mixin."""
-
-    profile = models.ForeignKey(
-        Profile,
-        related_name='+',
-        on_delete=models.DO_NOTHING,
-    )
-
-    class Meta:
-        abstract = True
-
-
-class Book(PublicationMixin, MetaInfoMixin, PreserveModelMixin):
+class Book(
+        PublishableModelMixin,
+        PublicationMixin,
+        MetaInfoMixin,
+        PreserveModelMixin,
+):
     """Books model."""
+
+    class Publishable:
+        fields = (
+            'title',
+            'author',
+            'description',
+        )
 
     class Meta:
         verbose_name = 'Book'
@@ -84,7 +84,7 @@ class Book(PublicationMixin, MetaInfoMixin, PreserveModelMixin):
 
     @property
     def author(self):
-        return self.tags.filter(tags__slug__iexact='author')[0]
+        return self.tags.filter(tags__slug__iexact='author').first()
 
     def __str__(self):
         """Title and author of book."""
@@ -179,7 +179,43 @@ class BookChapter(MetaInfoMixin, PreserveModelMixin):
         verbose_name_plural = 'Books\' chapters'
 
 
-class BookReview(ProfileReferredMixin, MetaInfoMixin, PreserveModelMixin):
+class ReadingList(
+        PublishableModelMixin,
+        ProfileReferredMixin,
+        MetaInfoMixin,
+        PreserveModelMixin,
+):
+    """Reading list model."""
+
+    title = models.CharField(
+        max_length=200,
+        db_index=True,
+    )
+    books = models.ManyToManyField(
+        Book,
+        related_name='reading_lists',
+        verbose_name=_('Books'),
+        on_delete=models.PROTECT,
+    )
+
+    class Publishable:
+        fields = (
+            'title',
+            'copy',
+            'books',
+        )
+
+    class Meta:
+        verbose_name = 'Reading List'
+        verbose_name_plural = 'Reading Lists'
+
+
+class BookReview(
+        PublishableModelMixin,
+        ProfileReferredMixin,
+        MetaInfoMixin,
+        PreserveModelMixin,
+):
     """Book reviews model."""
 
     TYPES = Choices(
@@ -208,6 +244,21 @@ class BookReview(ProfileReferredMixin, MetaInfoMixin, PreserveModelMixin):
         on_delete=models.DO_NOTHING,
         blank=True,
     )
+    reading_list = models.ForeignKey(
+        ReadingList,
+        related_name='reviews',
+        verbose_name=_('Reading List'),
+        on_delete=models.DO_NOTHING,
+        blank=True,
+    )
+
+    class Publishable:
+        fields = (
+            'type',
+            'copy',
+            ('book', 'id,title,author'),
+            'progress',
+        )
 
     class Meta:
         verbose_name = 'Book review'

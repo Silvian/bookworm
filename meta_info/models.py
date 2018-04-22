@@ -36,13 +36,15 @@ class TagMixin(models.Model):
 class Tag(TagMixin, PreserveModelMixin):
     """Tag model."""
 
+    PREFIX = '#'  # hash
+
     class Meta:
         verbose_name = 'Tag'
         verbose_name_plural = 'Tags'
 
     def __str__(self):
         """Display only as URI valid slug."""
-        return self.slug
+        return '{}{}'.format(self.PREFIX, self.copy)
 
 
 class MetaInfoMixin(models.Model):
@@ -89,12 +91,9 @@ class MetaInfo(MetaInfoMixin, PreserveModelMixin):
 
     def __str__(self):
         """Represent MetaInfo in brevity from complex store."""
-        description = self.copy
+        description = self.copy if self.copy else self.uri
         if not self.copy:
-            if self.uri:
-                description = self.uri
-            else:
-                description = 'meta empty'
+            description = 'meta empty'
         return '{} "{}" tags:{}'.format(
             self.id,
             description[:20],

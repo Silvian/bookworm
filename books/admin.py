@@ -18,13 +18,16 @@ class BookAdmin(admin.ModelAdmin):
         'title',
         'description',
     )
-
     search_fields = (
         'title',
         'tags__copy',
     )
-
     list_filter = ('title',)
+    exclude = (
+        'created_at',
+        'modified_at',
+        'deleted_at',
+    )
 
 
 @admin.register(BookProgress)
@@ -36,13 +39,16 @@ class BookProgressAdmin(admin.ModelAdmin):
         'book',
         'profile',
     )
-
     search_fields = (
         'book__title',
         'profile__user__username',
     )
-
     list_filter = ('book__title',)
+    exclude = (
+        'created_at',
+        'modified_at',
+        'deleted_at',
+    )
 
 
 @admin.register(BookReview)
@@ -54,12 +60,15 @@ class BookReviewAdmin(admin.ModelAdmin):
         'book',
         'copy',
     )
-
     search_fields = (
         'book__title',
         'profile__user__username',
     )
-
     list_filter = (
         'book__title',
+    )
+    exclude = (
+        'created_at',
+        'modified_at',
+        'deleted_at',
     )

@@ -12,11 +12,11 @@ from meta_info.models import (MetaInfoMixin, MetaInfo)
 
 
 SOCIAL_PLATFORMS = (
-    'facebook',
-    'twitter',
-    'google',
-    'instagram',
-    'pintrest',
+    ('Facebook', ('social', ), ),
+    ('Twitter', ('social', ), ),
+    ('Google', ('social', ), ),
+    ('Instagram', ('social', ), ),
+    ('Pintrest', ('social', ), ),
 )
 TAGS = (
     'primary',
@@ -58,12 +58,6 @@ class ContactMethod(MetaInfoMixin, PreserveModelMixin):
     uri = models.URLField(
         blank=True,
         null=True,
-    )
-    profile = models.ForeignKey(
-        'Profile',
-        related_name='contacts',
-        verbose_name=_('Contact details profile'),
-        on_delete=models.DO_NOTHING,
     )
 
     class Meta:
@@ -120,6 +114,12 @@ class Profile(PreserveModelMixin):
     birth_date = models.DateField(
         null=True,
         blank=True,
+    )
+    contacts = models.ForeignKey(
+        ContactMethod,
+        related_name='profiles',
+        verbose_name=_('Contact details'),
+        on_delete=models.DO_NOTHING,
     )
     meta_info = models.ForeignKey(
         MetaInfo,

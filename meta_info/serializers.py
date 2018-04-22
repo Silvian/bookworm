@@ -12,16 +12,16 @@ class TagSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tag
-        fields = (
-            'copy',
-            'tags',
-        )
         read_only_fields = (
             'id',
             'slug',
             'created_at',
             'modified_at',
             'deleted_at',
+        )
+        fields = read_only_fields + (
+            'copy',
+            'tags',
         )
 
 
