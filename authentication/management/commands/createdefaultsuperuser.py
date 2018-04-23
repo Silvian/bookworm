@@ -20,7 +20,7 @@ class Command(BaseCommand):
             user = User.objects.create_superuser(
                 'root',
                 'root@admin.com',
-                'root',
+                'iamsosecret',
             )
             logger.info('Default super user created: {}'.format(user.username))
         else:

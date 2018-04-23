@@ -58,7 +58,6 @@ class BookReviewAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'book',
-        'copy',
     )
     search_fields = (
         'book__title',

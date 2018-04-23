@@ -1,5 +1,5 @@
 
-from books.exceptions import OperationReservedInternally
+from bookworm.exceptions import OperationReservedInternally
 
 
 class ProfileAssociationSerializerMixin:

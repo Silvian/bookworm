@@ -8,7 +8,7 @@ from model_utils import Choices
 from hashid_field import HashidAutoField
 
 from bookworm.mixins import PreserveModelMixin
-from meta_info.models import (MetaInfoMixin, MetaInfo)
+from meta_info.models import MetaInfo
 
 
 SOCIAL_PLATFORMS = (
@@ -29,7 +29,7 @@ TAGS = (
 ) + SOCIAL_PLATFORMS
 
 
-class ContactMethod(MetaInfoMixin, PreserveModelMixin):
+class ContactMethod(PreserveModelMixin):
     """Contact method."""
 
     TYPES = Choices(
@@ -41,6 +41,7 @@ class ContactMethod(MetaInfoMixin, PreserveModelMixin):
         (5, 'social', _('social network id')),
     )
 
+    id = HashidAutoField(primary_key=True)
     type = models.IntegerField(
         choices=TYPES,
         default=TYPES.email,
@@ -59,10 +60,44 @@ class ContactMethod(MetaInfoMixin, PreserveModelMixin):
         blank=True,
         null=True,
     )
+    meta_info = models.ForeignKey(
+        MetaInfo,
+        related_name='contacts+',
+        verbose_name=_('Meta data'),
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+    )
+    profile = models.ForeignKey(
+        'Profile',
+        related_name='contacts',
+        verbose_name=_('Profile'),
+        on_delete=models.DO_NOTHING,
+    )
+    circle = models.ForeignKey(
+        'Circle',
+        related_name='contacts',
+        verbose_name=_('Circle'),
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+    )
+
+    def save(self):
+        if not self.meta_info:
+            self.meta_info = MetaInfo.objects.create()
+        super().save()
 
     class Meta:
         verbose_name = 'Contact Method'
         verbose_name_plural = 'Contact Methods'
+
+    def __str__(self):
+        """Valid email output of profile."""
+        base = 'Contact {} {}'.format(self.type, self.detail)
+        if self.circle:
+            return '{}, circle({})'.format(self.circle)
+        return base
 
 
 class Profile(PreserveModelMixin):
@@ -115,18 +150,19 @@ class Profile(PreserveModelMixin):
         null=True,
         blank=True,
     )
-    contacts = models.ForeignKey(
-        ContactMethod,
-        related_name='profiles',
-        verbose_name=_('Contact details'),
-        on_delete=models.DO_NOTHING,
-    )
     meta_info = models.ForeignKey(
         MetaInfo,
-        related_name='profile_meta+',
-        verbose_name=_('Profile meta data'),
+        related_name='profiles+',
+        verbose_name=_('Meta data'),
         on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
     )
+
+    def save(self):
+        if not self.meta_info:
+            self.meta_info = MetaInfo.objects.create()
+        super().save()
 
     class Meta:
         verbose_name = 'Profile'

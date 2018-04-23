@@ -5,6 +5,10 @@ from authentication.models import (
     Profile,
     ContactMethod,
 )
+from authentication.models_circles import (
+    Circle,
+    Invitation,
+)
 
 
 @admin.register(ContactMethod)
@@ -44,4 +48,41 @@ class ProfileAdmin(admin.ModelAdmin):
     )
     readonly_fields = (
         'user',
+    )
+
+
+@admin.register(Circle)
+class CircleAdmin(admin.ModelAdmin):
+    """Circle admin."""
+
+    list_display = (
+        'id',
+        'title',
+        'created_by',
+    )
+    exclude = (
+        'created_at',
+        'modified_at',
+        'deleted_at',
+    )
+    readonly_fields = (
+    )
+
+
+@admin.register(Invitation)
+class InvitationAdmin(admin.ModelAdmin):
+    """Invitation admin."""
+
+    list_display = (
+        'id',
+        'status',
+        'profile_to',
+        'circle',
+    )
+    exclude = (
+        'created_at',
+        'modified_at',
+        'deleted_at',
+    )
+    readonly_fields = (
     )

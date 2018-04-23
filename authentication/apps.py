@@ -6,4 +6,5 @@ class AuthenticationConfig(AppConfig):
     verbose_name = 'User Authentication'
 
     def ready(self):
+        from authentication import models_circles  # noqa
         from authentication import signals  # noqa

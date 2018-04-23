@@ -9,7 +9,12 @@ from hashid_field import HashidAutoField
 from bookworm.mixins import (
     PublishableModelMixin, ProfileReferredMixin, PreserveModelMixin
 )
-from meta_info.models import MetaInfoMixin
+from meta_info.models import MetaInfo
+from books.serializers import (
+    PublishBookSerializer,
+    PublishReadingListSerializer,
+    PublishBookReviewSerializer,
+)
 
 
 GENRES = (
@@ -66,17 +71,24 @@ class PublicationMixin(models.Model):
 class Book(
         PublishableModelMixin,
         PublicationMixin,
-        MetaInfoMixin,
         PreserveModelMixin,
 ):
     """Books model."""
 
+    id = HashidAutoField(primary_key=True)
+    meta_info = models.ForeignKey(
+        MetaInfo,
+        related_name='books+',
+        verbose_name=_('Meta data'),
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+    )
+
     class Publishable:
-        fields = (
-            'title',
-            'author',
-            'description',
-        )
+        publishable_verification = None
+        publishable_children = ('reviews', )
+        serializer = PublishBookSerializer
 
     class Meta:
         verbose_name = 'Book'
@@ -84,14 +96,17 @@ class Book(
 
     @property
     def author(self):
-        return self.tags.filter(tags__slug__iexact='author').first()
+        return self.tags.filter(meta_info__tags__slug__iexact='author').first()
 
     def __str__(self):
         """Title and author of book."""
         return '{} by {}'.format(self.title, self.author.copy)
 
 
-class BookProgress(ProfileReferredMixin, PreserveModelMixin):
+class BookProgress(
+        ProfileReferredMixin,
+        PreserveModelMixin,
+):
     """Book progress model."""
 
     id = HashidAutoField(primary_key=True)
@@ -121,41 +136,10 @@ class BookProgress(ProfileReferredMixin, PreserveModelMixin):
         return '{} at {}%'.format(self.book.title, self.percent)
 
 
-class PublicationFile(MetaInfoMixin, PreserveModelMixin):
-    """Publication file model."""
-
-    file = models.FileField()
-    book = models.ForeignKey(
-        Book,
-        related_name='files',
-        verbose_name=_('Book'),
-        on_delete=models.DO_NOTHING,
-    )
-    extension = models.CharField(
-        max_length=20,
-        blank=True,
-    )
-    mime = models.CharField(
-        max_length=50,
-        blank=True,
-    )
-    progress = models.ForeignKey(
-        BookProgress,
-        related_name='file_progress+',
-        verbose_name=_('Progress'),
-        on_delete=models.DO_NOTHING,
-        blank=True,
-        null=True,
-    )
-
-    class Meta:
-        verbose_name = 'Publication File'
-        verbose_name_plural = 'Publications\' Files'
-
-
-class BookChapter(MetaInfoMixin, PreserveModelMixin):
+class BookChapter(PreserveModelMixin):
     """Book chapter model."""
 
+    id = HashidAutoField(primary_key=True)
     title = models.CharField(
         max_length=200,
         db_index=True,
@@ -173,6 +157,14 @@ class BookChapter(MetaInfoMixin, PreserveModelMixin):
         verbose_name=_('Book'),
         on_delete=models.DO_NOTHING,
     )
+    meta_info = models.ForeignKey(
+        MetaInfo,
+        related_name='book_chapters+',
+        verbose_name=_('Meta data'),
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+    )
 
     class Meta:
         verbose_name = 'Book chapter'
@@ -182,11 +174,11 @@ class BookChapter(MetaInfoMixin, PreserveModelMixin):
 class ReadingList(
         PublishableModelMixin,
         ProfileReferredMixin,
-        MetaInfoMixin,
         PreserveModelMixin,
 ):
     """Reading list model."""
 
+    id = HashidAutoField(primary_key=True)
     title = models.CharField(
         max_length=200,
         db_index=True,
@@ -195,15 +187,20 @@ class ReadingList(
         Book,
         related_name='reading_lists',
         verbose_name=_('Books'),
-        on_delete=models.PROTECT,
+    )
+    meta_info = models.ForeignKey(
+        MetaInfo,
+        related_name='reading_lists+',
+        verbose_name=_('Meta data'),
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
     )
 
     class Publishable:
-        fields = (
-            'title',
-            'copy',
-            'books',
-        )
+        publishable_verification = None
+        publishable_children = None
+        serializer = PublishReadingListSerializer
 
     class Meta:
         verbose_name = 'Reading List'
@@ -213,7 +210,6 @@ class ReadingList(
 class BookReview(
         PublishableModelMixin,
         ProfileReferredMixin,
-        MetaInfoMixin,
         PreserveModelMixin,
 ):
     """Book reviews model."""
@@ -226,6 +222,7 @@ class BookReview(
         (4, 'paragraph', _('Paragraph highlight')),
     )
 
+    id = HashidAutoField(primary_key=True)
     type = models.IntegerField(
         choices=TYPES,
         default=TYPES.review,
@@ -251,14 +248,19 @@ class BookReview(
         on_delete=models.DO_NOTHING,
         blank=True,
     )
+    meta_info = models.ForeignKey(
+        MetaInfo,
+        related_name='book_reviews+',
+        verbose_name=_('Meta data'),
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+    )
 
     class Publishable:
-        fields = (
-            'type',
-            'copy',
-            ('book', 'id,title,author'),
-            'progress',
-        )
+        publishable_verification = None
+        publishable_children = None
+        serializer = PublishBookReviewSerializer
 
     class Meta:
         verbose_name = 'Book review'
