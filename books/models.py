@@ -86,6 +86,10 @@ class Book(models.Model):
         verbose_name=_('author'),
         blank=True,
     )
+    rating = models.PositiveIntegerField(
+        blank=True,
+        null = True,
+    )
     publisher = models.ForeignKey(
         Publisher,
         related_name="+",
