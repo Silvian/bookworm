@@ -10,7 +10,7 @@ django-cron==0.5.0
 django-filter==1.1.0
 django-model-utils==3.1.1
 django-rest-swagger==2.1.2
-djangorestframework==3.7.7
+djangorestframework==3.9.1
 factory-boy==2.9.2
 Faker==0.8.10
 gunicorn==19.7.1
